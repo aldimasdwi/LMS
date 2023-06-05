@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 //Admin Namespace
@@ -32,6 +33,10 @@ Route::get('/home',[HomeController::class,'index'])->name('home');
 Route::get('/about',[HomeController::class,'about'])->name('about');
 Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
+// Pendaftaran
+Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran');
+Route::post('/pendaftaran', [PendaftaranController::class, 'daftar']);
+
 //Artikel
 Route::get('/artikel',[ArtikelController::class,'index'])->name('artikel');
 Route::get('/artikel/search',[ArtikelController::class,'search'])->name('artikel.search');
@@ -56,5 +61,8 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware' => ['auth'
 		Route::resource('agenda','AgendaController');
 		Route::resource('artikel','ArtikelController');
 		Route::resource('kategori-artikel','KategoriArtikelController');
+
+		// Pendaftaran
+		Route::get("/pendaftaran", [PendaftaranController::class, "adminIndex"])->name("pendaftaran.index");
 	});
 });

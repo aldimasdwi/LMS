@@ -28,6 +28,7 @@
                         <li><a href="{{ route('artikel') }}" class="{{ Request::segment(1) == 'artikel' ? 'text-primary' : '' }}">Artikel</a></li>
                         <li><a href="{{ route('pengumuman') }}" class="{{ Request::segment(1) == 'pengumuman' ? 'text-primary' : '' }}">Pengumuman</a></li>
                         <li><a href="" class="{{ Request::is('agenda') ? 'text-primary' : '' }}">Agenda</a></li>
+                        <li><a href="{{ route('pendaftaran') }}" class="{{ Request::is('pendaftaran') ? 'text-primary' : '' }}">Pendaftaran</a></li>
                     </ul>
 
                     <!-- Search Button -->

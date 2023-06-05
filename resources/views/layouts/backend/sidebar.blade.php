@@ -71,6 +71,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ route('admin.pendaftaran.index') }}" class="nav-link {{ Request::segment(2) == 'agenda' ? 'active' : '' }}">
+            <i class="nav-icon fa fa-book"></i>
+            <p>
+              Pendaftaran
+            </p>
+          </a>
+        </li>
 
         <li class="nav-header">PENGATURAN</li>
         <li class="nav-item">

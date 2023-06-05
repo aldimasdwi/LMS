@@ -1,6 +1,6 @@
 @extends('layouts.backend.app',[
-	'title' => 'Manage Users',
-	'contentTitle' => 'Manage Users',
+	'title' => 'Users Registration',
+	'contentTitle' => 'Users Registration',
 ])
 @push('css')
 <!-- DataTables -->
@@ -11,9 +11,6 @@
 <div class="row">
 	<div class="col">
 		<div class="card">
-			<div class="card-header">
-				<a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
-			</div>
 			<div class="card-body table-responsive">
 				<table id="dataTable1" class="table table-bordered table-hover">
 				<thead>

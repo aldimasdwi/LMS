@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status_id',
     ];
 
     /**
@@ -44,6 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function booted(){
+        self::creating(function ($user) {
+            $user->status_id = 1;
+        });
+    }
     public function artikel()
     {
         return $this->hasMany(Artikel::class);
@@ -52,5 +58,31 @@ class User extends Authenticatable
     public function pengumuman()
     {
         return $this->hasMany(Pengumuman::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function personal_data()
+    {
+        return $this->hasOne(PersonalData::class);
+    }
+    public function contact()
+    {
+        return $this->hasOne(Contact::class);
+    }
+    public function education()
+    {
+        return $this->hasOne(Education::class);
+    }
+    public function family()
+    {
+        return $this->hasOne(Family::class);
+    }
+    public function kuesioner()
+    {
+        return $this->hasOne(Kuesioner::class);
     }
 }

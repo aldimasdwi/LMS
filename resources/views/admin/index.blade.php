@@ -65,6 +65,24 @@
     </div>
   </div>
   <!-- ./col -->
+  <div class="col-lg-3 col-6">
+    <!-- small box -->
+    <div class="small-box bg-secondary">
+      <div class="inner">
+        @php
+            $pendaftaran_count = DB::table('users')->where('status_id', 1)->count()
+        @endphp
+        <h3>{{ $pendaftaran_count }}</h3>
+
+        <p>Pendaftaran</p>
+      </div>
+      <div class="icon">
+        <i class="fas fa-book"></i>
+      </div>
+      <a href="{{ route('admin.pendaftaran.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <!-- ./col -->
 </div>
 <!-- /.row -->
 @stop
