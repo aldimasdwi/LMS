@@ -1,7 +1,13 @@
 @extends('layouts.frontend.app',[
-    'title' => 'Home',
+'title' => 'Home',
 ])
 @section('content')
+@if (session()->has('notice'))
+<div class="text-center bg-success fixed-top w-75 mx-auto my-3 p-4 text-light rounded">
+    <h4>{{ session('notice') }}</h4>
+    <i class="fa-solid fa-xmark"></i>
+</div>
+@endif
 <!-- ##### Hero Area Start ##### -->
 <section class="hero-area bg-img bg-overlay-2by5" style="background-image: url({{ asset('img/bg') }}/bg1.jpg);">
     <div class="container h-100">
@@ -24,12 +30,12 @@
             <div class="card-header">Laraschool</div>
             <div class="card-body">
                 <p class="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
         </div>
@@ -65,7 +71,8 @@
             @endforeach
         </div>
         <div class="row">
-            <a href="{{ route('pengumuman') }}" class="alert alert-success alert-link mx-auto">Lihat Semua Pengumuman</a>
+            <a href="{{ route('pengumuman') }}" class="alert alert-success alert-link mx-auto">Lihat Semua
+                Pengumuman</a>
         </div>
     </div>
 </section>
@@ -84,29 +91,31 @@
         </div>
 
         <div class="row">
-            
+
             @foreach($artikel as $art)
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            {{ $art->judul }}
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        {{ $art->judul }}
 
-                            <span class="badge badge-danger float-right">Author : {{ $art->user->name }}</span>
-                        </div>
-                        <div class="card-body">
-                            <img src="{{ asset($art->getThumbnail()) }}" width="100%" style="height: 300px; object-fit: cover; object-position: center;">
+                        <span class="badge badge-danger float-right">Author : {{ $art->user->name }}</span>
+                    </div>
+                    <div class="card-body">
+                        <img src="{{ asset($art->getThumbnail()) }}" width="100%"
+                            style="height: 300px; object-fit: cover; object-position: center;">
 
-                            <div class="card-text mt-3">
-                                {!! Str::limit($art->deskripsi) !!}
-                            </div>
+                        <div class="card-text mt-3">
+                            {!! Str::limit($art->deskripsi) !!}
+                        </div>
 
-                            <a href="{{ route('artikel.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
-                        </div>
-                        <div class="card-footer">
-                                <span class="badge badge-primary float-right">kategori : {{ $art->kategoriArtikel->nama_kategori }}</span>
-                        </div>
+                        <a href="{{ route('artikel.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                    </div>
+                    <div class="card-footer">
+                        <span class="badge badge-primary float-right">kategori : {{ $art->kategoriArtikel->nama_kategori
+                            }}</span>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
         <div class="row mt-3">

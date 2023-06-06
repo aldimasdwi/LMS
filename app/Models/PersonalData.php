@@ -11,6 +11,7 @@ class PersonalData extends Model
 
     protected $fillable = [
         'user_id',
+        'photo',
         'gelombang',
         'jenis_kelamin',
         'sudah_lulus_sekolah',

@@ -15,7 +15,7 @@ class CreateEducationTable extends Migration
     {
         Schema::create('educations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('lulusan')->nullable();
             $table->string('jurusan_di_sekolah')->nullable();
             $table->string('pengalaman_organisasi')->nullable();

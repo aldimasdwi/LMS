@@ -8,9 +8,9 @@ use App\Models\Education;
 use App\Models\Family;
 use App\Models\Kuesioner;
 use App\Models\PersonalData;
-use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Redirect;
 
@@ -28,11 +28,24 @@ class PendaftaranController extends Controller
     public function daftar(PendaftaranRequest $request)
     {
         $user = User::create($request->validated());
-        PersonalData::create($request->validated() + ["user_id" => $user->id]);
-        Contact::create($request->validated() + ["user_id" => $user->id]);
-        Education::create($request->validated() + ["user_id" => $user->id]);
-        Family::create($request->validated() + ["user_id" => $user->id]);
-        Kuesioner::create($request->validated() + ["user_id" => $user->id]);
+        $validatedData = $request->safe()->merge(["user_id" => $user->id]);
+
+        if ($request->has('photo')) {
+            $path = $request->file("photo")->store('public/images/user');
+            $photo = ["photo" => \Str::remove('public/', $path)];
+            $validatedData->merge($photo);
+        }
+        
+        PersonalData::create($validatedData->toArray());
+
+        Contact::create($validatedData->toArray());
+
+        Education::create($validatedData->toArray());
+
+        Family::create($validatedData->toArray());
+
+        Kuesioner::create($validatedData->toArray());
+
         return Redirect::to('/')->with(["notice" => "Pendaftaran Berhasil Terkirim"]);
     }
 }

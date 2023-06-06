@@ -15,7 +15,7 @@ class CreateKuesionerTable extends Migration
     {
         Schema::create('kuesioner', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('punya_laptop')->nullable();
             $table->string('hafalan_alquran')->nullable();
             $table->string('tokoh_idola')->nullable();

@@ -24,6 +24,7 @@ class PendaftaranRequest extends FormRequest
     public function rules()
     {
         return [
+            'photo' => ['optional'],
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'gelombang' => ['required'],

@@ -11,7 +11,7 @@
       <div class="inner">
         <h3>@count('users')</h3>
 
-        <p>Admin</p>
+        <p>User</p>
       </div>
       <div class="icon">
         <i class="fas fa-user-tie"></i>

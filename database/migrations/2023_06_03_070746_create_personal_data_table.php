@@ -15,7 +15,8 @@ class CreatePersonalDataTable extends Migration
     {
         Schema::create('personal_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('photo')->default("image/default.jpg");
             $table->string('gelombang')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->string('sudah_lulus_sekolah')->nullable();

@@ -15,7 +15,7 @@ class CreateFamilyTable extends Migration
     {
         Schema::create('family', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('kondisi_orang_tua')->nullable();
             $table->string('nomor_seluler_orang_tua')->nullable();
             $table->string('nama_ayah')->nullable();

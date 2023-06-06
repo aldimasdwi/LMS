@@ -15,7 +15,7 @@ class CreateContactTable extends Migration
     {
         Schema::create('contact', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")->constrained();
+            $table->foreignId("user_id")->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('nomor_whatsapp');
             $table->string('akun_facebook');
             $table->timestamps();
