@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArtikelRequest as Request;
 
 use App\Models\Artikel;
+use Illuminate\Support\Carbon;
 
 class ArtikelController extends Controller
 {
@@ -16,6 +17,11 @@ class ArtikelController extends Controller
 
     public function show(Artikel $artikel)
     {
+        $tersedia = new Carbon($artikel->tersedia);
+        if ($tersedia->greaterThan(now())){
+            return redirect()->back()->withErrors(['tersedia' => 'Artikel akan tersedia '.$tersedia->locale('id')->diffForHumans()]);
+        }
+
     	return view('artikel.show',compact('artikel'));
     }
 

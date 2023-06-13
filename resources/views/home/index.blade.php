@@ -3,9 +3,8 @@
 ])
 @section('content')
 @if (session()->has('notice'))
-<div class="text-center bg-success fixed-top w-75 mx-auto my-3 p-4 text-light rounded">
-    <h4>{{ session('notice') }}</h4>
-    <i class="fa-solid fa-xmark"></i>
+<div class="text-center bg-success fixed-top w-100 mx-auto p-1">
+    <h6>{{ session('notice') }}</h6>
 </div>
 @endif
 <!-- ##### Hero Area Start ##### -->
@@ -97,7 +96,10 @@
                 <div class="card">
                     <div class="card-header">
                         {{ $art->judul }}
-
+                        @php
+                        $available = new \Illuminate\Support\Carbon($art->tersedia);
+                        $isAvailable = $available->lessThanOrEqualTo(now());
+                        @endphp
                         <span class="badge badge-danger float-right">Author : {{ $art->user->name }}</span>
                     </div>
                     <div class="card-body">
@@ -105,14 +107,19 @@
                             style="height: 300px; object-fit: cover; object-position: center;">
 
                         <div class="card-text mt-3">
-                            {!! Str::limit($art->deskripsi) !!}
+                            {{ Str::limit(strip_tags($art->deskripsi)) }}
                         </div>
-
-                        <a href="{{ route('artikel.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                        @if ($isAvailable)
+                            <a href="{{ route('artikel.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                        @endif
                     </div>
                     <div class="card-footer">
                         <span class="badge badge-primary float-right">kategori : {{ $art->kategoriArtikel->nama_kategori
                             }}</span>
+                        @if (!$isAvailable)
+                        <span class="badge badge-success float-right">Tersedia
+                            {{$available->locale('id')->diffForHumans()}}</span>
+                        @endif
                     </div>
                 </div>
             </div>

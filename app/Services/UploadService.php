@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Str;
+use Illuminate\Support\Str;
 
 class UploadService
 {

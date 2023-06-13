@@ -65,4 +65,11 @@ class PendaftaranRequest extends FormRequest
             'pelajaran_yang_disukai' => ['required'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Harap isi :attribute'
+        ];
+    }
 }

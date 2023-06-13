@@ -9,8 +9,10 @@ use App\Services\SummernoteService;
 use App\Services\UploadService;
 use App\Models\Artikel;
 use App\Models\KategoriArtikel;
-use Str;
+use Illuminate\Support\Str;
 use File;
+
+use Illuminate\Support\Facades\Validator;
 
 class ArtikelController extends Controller
 {
@@ -30,8 +32,8 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $artikel = Artikel::with(['user','kategoriArtikel'])->get();
-        return view('admin.artikel.index',compact('artikel'));
+        $artikel = Artikel::with(['user', 'kategoriArtikel'])->get();
+        return view('admin.artikel.index', compact('artikel'));
     }
 
     /**
@@ -42,7 +44,7 @@ class ArtikelController extends Controller
     public function create()
     {
         $kategoriArtikel = KategoriArtikel::all();
-        return view('admin.artikel.create',compact('kategoriArtikel'));
+        return view('admin.artikel.create', compact('kategoriArtikel'));
     }
 
     /**
@@ -53,16 +55,22 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tersedia' => ['regex:/^\d{4}\/\d{2}\/\d{2} ([01]\d|2[0-3]):[0-5]\d$/', 'required'],
+            'kategori_artikel_id' => 'required'
+        ]);
+
         Artikel::create([
             'judul' => $request->judul,
             'deskripsi' => $this->summernoteService->imageUpload('artikel'),
             'thumbnail' => $this->uploadService->imageUpload('artikel'),
             'slug' => Str::slug($request->judul),
             'user_id' => auth()->user()->id,
+            'tersedia' => $request->tersedia ?? now(),
             'kategori_artikel_id' => $request->kategori_artikel_id,
         ]);
 
-        return redirect()->route('admin.artikel.index')->with('success','Data berhasil ditambah');
+        return redirect()->route('admin.artikel.index')->with('success', 'Data berhasil ditambah');
     }
 
     /**
@@ -83,9 +91,9 @@ class ArtikelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Artikel $artikel)
-    {   
+    {
         $kategoriArtikel = KategoriArtikel::get();
-        return view('admin.artikel.edit',compact('artikel','kategoriArtikel'));
+        return view('admin.artikel.edit', compact('artikel', 'kategoriArtikel'));
     }
 
     /**
@@ -97,18 +105,21 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, Artikel $artikel)
     {
-        $this->authorize('update',$artikel);
-
-        Artikel::create([
+        $this->authorize('update', $artikel);
+        $requestBody = [
             'judul' => $request->judul,
             'deskripsi' => $this->summernoteService->imageUpload('artikel'),
             'thumbnail' => $this->uploadService->imageUpload('artikel'),
             'slug' => Str::slug($request->judul),
             'user_id' => auth()->user()->id,
+            'tersedia' => $request->tersedia ?? now(),
             'kategori_artikel_id' => $request->kategori_artikel_id,
-        ]);
-           
-        return redirect()->route('admin.artikel.index')->with('success','Data berhasil diupdate');
+        ];
+        foreach ($requestBody as $key => $value) {
+            $artikel[$key] = $value;
+        }
+        $artikel->save();
+        return redirect()->route('admin.artikel.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -118,12 +129,12 @@ class ArtikelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Artikel $artikel)
-    {   
-        $this->authorize('delete',$artikel);
+    {
+        $this->authorize('delete', $artikel);
 
         event(new ArtikelDeleteEvent($artikel));
-        
+
         $artikel->delete();
-        return redirect()->route('admin.artikel.index')->with('success','Data berhasil dihapus');
+        return redirect()->route('admin.artikel.index')->with('success', 'Data berhasil dihapus');
     }
 }

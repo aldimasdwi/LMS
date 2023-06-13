@@ -38,7 +38,7 @@
                   <td>{{ $art->kategoriArtikel->nama_kategori }}</td>
                   
                   <td>
-                    @if(auth()->user()->id == $art->user_id)
+                    @if(auth()->user()->id == $art->upser_id)
                     <div class="row ml-2">
                         <a href="{{ route('admin.artikel.edit',$art->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit fa-fw"></i></a>
                         

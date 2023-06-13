@@ -15,21 +15,21 @@ class Artikel extends Model
     protected $table = 'artikel';
 
     protected $fillable = [
-    	'judul','slug','deskripsi','thumbnail','slug','user_id','kategori_artikel_id',
+        'judul', 'slug', 'deskripsi', 'thumbnail', 'slug', 'user_id', 'kategori_artikel_id', 'tersedia',
     ];
 
     public function user()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function kategoriArtikel()
     {
-    	return $this->belongsTo(KategoriArtikel::class);
+        return $this->belongsTo(KategoriArtikel::class);
     }
 
     public function getThumbnail()
     {
-    	return 'uploads/img/artikel/'.$this->thumbnail;
+        return 'uploads/img/artikel/' . $this->thumbnail;
     }
 }

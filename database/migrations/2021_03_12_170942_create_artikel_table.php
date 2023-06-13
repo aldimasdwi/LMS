@@ -21,6 +21,7 @@ class CreateArtikelTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('kategori_artikel_id')->nullable();
+            $table->date('tersedia')->nullable();
             $table->timestamps();
         });
     }
