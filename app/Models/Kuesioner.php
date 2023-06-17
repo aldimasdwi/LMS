@@ -9,7 +9,8 @@ class Kuesioner extends Model
 {
     use HasFactory;
 
-    protected $table = "kuesioner";
+    protected $table = "kuesioners";
+    
     protected $fillable =[
         'user_id',
         'punya_laptop',

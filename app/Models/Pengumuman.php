@@ -11,7 +11,7 @@ class Pengumuman extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengumuman';
+    protected $table = 'pengumumans';
 
     protected $fillable = [
         'judul',

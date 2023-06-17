@@ -9,8 +9,11 @@ class PersonalData extends Model
 {
     use HasFactory;
 
+    protected $table = "personal_datas";
+
     protected $fillable = [
         'user_id',
+        'jurusan_id',
         'photo',
         'gelombang',
         'jenis_kelamin',
@@ -22,4 +25,9 @@ class PersonalData extends Model
         'cita_cita',
         'alamat_rumah',
     ];
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class);
+    }
 }

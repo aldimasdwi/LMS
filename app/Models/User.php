@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use App\Models\Artikel;
+use App\Models\Materi;
 use App\Models\Pengumuman;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    protected $table = "users";
 
     /**
      * The attributes that are mass assignable.
@@ -47,12 +49,12 @@ class User extends Authenticatable
 
     public static function booted(){
         self::creating(function ($user) {
-            $user->status_id = 1;
+            $user->status_id = 3;
         });
     }
-    public function artikel()
+    public function materi()
     {
-        return $this->hasMany(Artikel::class);
+        return $this->hasMany(Materi::class);
     }
 
     public function pengumuman()

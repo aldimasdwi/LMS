@@ -10,6 +10,7 @@ class Education extends Model
     use HasFactory;
 
     protected $table = "educations";
+    
     protected $fillable = [
         'user_id',
         'lulusan',

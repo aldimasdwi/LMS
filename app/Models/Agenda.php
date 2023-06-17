@@ -9,7 +9,7 @@ class Agenda extends Model
 {
     use HasFactory;
 
-    protected $table = 'agenda';
+    protected $table = 'agendas';
 
     protected $fillable = [
     	'judul','slug','deskripsi','tgl','jam_mulai','jam_selesai','tgl_mulai','tgl_selesai','user_id',

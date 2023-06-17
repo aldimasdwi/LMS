@@ -24,14 +24,14 @@
     <!-- small box -->
     <div class="small-box bg-success">
       <div class="inner">
-        <h3>@count('artikel')</h3>
+        <h3>@count('materis')</h3>
 
-        <p>Artikel</p>
+        <p>Materi</p>
       </div>
       <div class="icon">
         <i class="fas fa-image"></i>
       </div>
-      <a href="{{ route('admin.artikel.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <a href="{{ route('admin.materi.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
     </div>
   </div>
   <!-- ./col -->
@@ -39,7 +39,7 @@
     <!-- small box -->
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>@count('pengumuman')</h3>
+        <h3>@count('pengumumans')</h3>
 
         <p>Pengumuman</p>
       </div>
@@ -54,7 +54,7 @@
     <!-- small box -->
     <div class="small-box bg-danger">
       <div class="inner">
-        <h3>@count('agenda')</h3>
+        <h3>@count('agendas')</h3>
 
         <p>Agenda</p>
       </div>

@@ -40,18 +40,18 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.artikel.index') }}" class="nav-link {{ Request::segment(2) == 'artikel' ? 'active' : '' }}">
+          <a href="{{ route('admin.materi.index') }}" class="nav-link {{ Request::segment(2) == 'materi' ? 'active' : '' }}">
             <i class="nav-icon far fa-image"></i>
             <p>
-              Artikel
+              Materi
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.kategori-artikel.index') }}" class="nav-link {{ Request::segment(2) == 'kategori-artikel' ? 'active' : '' }}">
+          <a href="{{ route('admin.kategori-materi.index') }}" class="nav-link {{ Request::segment(2) == 'kategori-materi' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
-              Kategori Artikel
+              Kategori Materi
             </p>
           </a>
         </li>

@@ -47,8 +47,13 @@
                       <i class="fa fa-question-circle-o" data-toggle="tooltip" data-placement="top"
                         title="Isi dengan nama lengkap Anda."></i>
                     </label>
+                    @auth
+                    <input value="{{ auth()->user()->name }}" type="text" class="form-control" id="name" name="name"
+                      placeholder="Masukan nama" disabled>
+                    @else
                     <input value="{{ old('name') }}" type="text" class="form-control" id="name" name="name"
                       placeholder="Masukan nama">
+                    @endauth
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -256,8 +261,13 @@
                 <div class="col-xl-6">
                   <div class="form-group has-feedback">
                     <label class="syarat" for="email">Email</label>
+                    @auth
+                    <input value="{{ auth()->user()->email }}" type="email" id="email" class="form-control input-disabled" name="email"
+                      placeholder="example@mail.com" style="padding-right: 42px;" disabled />
+                    @else
                     <input value="{{ old('email') }}" type="email" id="email" class="form-control" name="email"
                       placeholder="example@mail.com" style="padding-right: 42px;" />
+                    @endauth
                     @error('email')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror

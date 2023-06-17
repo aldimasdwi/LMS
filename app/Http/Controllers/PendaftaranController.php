@@ -10,9 +10,12 @@ use App\Models\Kuesioner;
 use App\Models\PersonalData;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-use Redirect;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class PendaftaranController extends Controller
 {
@@ -27,15 +30,23 @@ class PendaftaranController extends Controller
     }
     public function daftar(PendaftaranRequest $request)
     {
+        $validator =  Validator::make($request->validated(), [
+        ]);
+        if (!Auth::check()){
+            // $valida
+        }
+
+        $validator->validate();
+
         $user = User::create($request->validated());
         $validatedData = $request->safe()->merge(["user_id" => $user->id]);
 
         if ($request->has('photo')) {
             $path = $request->file("photo")->store('public/images/user');
-            $photo = ["photo" => \Str::remove('public/', $path)];
+            $photo = ["photo" => Str::remove('public/', $path)];
             $validatedData->merge($photo);
         }
-        
+
         PersonalData::create($validatedData->toArray());
 
         Contact::create($validatedData->toArray());

@@ -77,21 +77,21 @@
 </section>
 @endif
 
-@if($artikel->count() > 0)
-<!-- ##### Artikel ##### -->
+@if($materi->count() > 0)
+<!-- ##### Materi ##### -->
 <section class="blog-area section-padding-100-0 mb-50">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>Artikel Terbaru</h3>
+                    <h3>Materi Terbaru</h3>
                 </div>
             </div>
         </div>
 
         <div class="row">
 
-            @foreach($artikel as $art)
+            @foreach($materi as $art)
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
@@ -110,11 +110,11 @@
                             {{ Str::limit(strip_tags($art->deskripsi)) }}
                         </div>
                         @if ($isAvailable)
-                            <a href="{{ route('artikel.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                            <a href="{{ route('materi.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
                         @endif
                     </div>
                     <div class="card-footer">
-                        <span class="badge badge-primary float-right">kategori : {{ $art->kategoriArtikel->nama_kategori
+                        <span class="badge badge-primary float-right">kategori : {{ $art->kategoriMateri->nama_kategori
                             }}</span>
                         @if (!$isAvailable)
                         <span class="badge badge-success float-right">Tersedia
@@ -126,7 +126,7 @@
             @endforeach
         </div>
         <div class="row mt-3">
-            <a href="{{ route('artikel') }}" class="alert alert-success alert-link mx-auto mt-3">Lihat Semua Artikel</a>
+            <a href="{{ route('materi') }}" class="alert alert-success alert-link mx-auto mt-3">Lihat Semua Materi</a>
         </div>
     </div>
 </section>

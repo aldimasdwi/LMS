@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\UsersController;
 //Controllers Namespace
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AgendaController;
-use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PengumumanController;
 
 /*
@@ -37,11 +37,11 @@ Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran');
 Route::post('/pendaftaran', [PendaftaranController::class, 'daftar']);
 
-//Artikel
-Route::get('/artikel',[ArtikelController::class,'index'])->name('artikel');
-Route::get('/artikel/search',[ArtikelController::class,'search'])->name('artikel.search');
+//Materi
+Route::get('/materi',[MateriController::class,'index'])->name('materi');
+Route::get('/materi/search',[MateriController::class,'search'])->name('materi.search');
 
-Route::get('/artikel/{artikel:slug}',[ArtikelController::class,'show'])->name('artikel.show');
+Route::get('/materi/{materi:slug}',[MateriController::class,'show'])->name('materi.show');
 
 //Pengumuman
 Route::get('/pengumuman',[PengumumanController::class,'index'])->name('pengumuman');
@@ -59,8 +59,8 @@ Route::group(['namespace' => 'Admin','prefix' => 'admin','middleware' => ['auth'
 		Route::resource('users','UsersController');
 		Route::resource('pengumuman','PengumumanController');
 		Route::resource('agenda','AgendaController');
-		Route::resource('artikel','ArtikelController');
-		Route::resource('kategori-artikel','KategoriArtikelController');
+		Route::resource('materi','MateriController');
+		Route::resource('kategori-materi','KategoriMateriController');
 
 		// Pendaftaran
 		Route::get("/pendaftaran", [PendaftaranController::class, "adminIndex"])->name("pendaftaran.index");

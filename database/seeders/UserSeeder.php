@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('users')->insert([
+        DB::table('users')->insert([
             [
                 'name' => 'Rahmat Hidayatullah',
                 'email' => 'rahmat@example.com',
@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
                 'status_id' => 2,
             ],
             [
-                'name' => 'Sakuranomiya',
-                'email' => 'sakuranomiya@example.com',
+                'name' => 'user',
+                'email' => 'user@user.com',
                 'password' => bcrypt('password'),
                 'status_id' => 2,
             ],

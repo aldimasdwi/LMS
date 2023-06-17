@@ -21,7 +21,7 @@ class SummernoteService
             list(, $data)      = explode(',', $data);
             $data = base64_decode($data);
 
-            $image_name = "/uploads/img/artikel/". Str::random(9).time().$k.'.png';
+            $image_name = "/uploads/img/materi/". Str::random(9).time().$k.'.png';
             $path = public_path().$image_name;
             File::put($path,$data);
         

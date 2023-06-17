@@ -25,18 +25,18 @@ Password : password
 
 ## Fitur
 # Front / Depan
-- Home (Halaman home,menampilkan artikel,pengumuman terbaru) 
-- Artikel & Show + pencarian artikel  
+- Home (Halaman home,menampilkan materi,pengumuman terbaru) 
+- Materi & Show + pencarian materi  
 - Pengumuman & Show
 
 # admin
 - Autentikasi (menggunakan fortify)
 - Halaman Dashboard
 - Manage User (CRUD)
-- Manage Artikel (CRUD)
+- Manage Materi (CRUD)
 - Manage Agenda (CRUD)
 - Manage Pengumuman (CRUD)
-- Manage Kategori Artikel (CRUD)
+- Manage Kategori Materi (CRUD)
 
 ## Author
 - Rahmat Hidayatullah

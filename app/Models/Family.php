@@ -9,7 +9,8 @@ class Family extends Model
 {
     use HasFactory;
 
-    protected $table = "family";
+    protected $table = "families";
+    
     protected $fillable = [
         'user_id',
         'kondisi_orang_tua',
