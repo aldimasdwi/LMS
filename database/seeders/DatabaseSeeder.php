@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             JurusanSeeder::class,
             UserSeeder::class,
+            KategoriMateriSeeder::class,
             MateriSeeder::class
         ]);
     }
