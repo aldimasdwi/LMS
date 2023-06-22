@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\KategoriMateri;
+use App\Models\Materi;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -20,6 +21,20 @@ class KategoriMateriController extends Controller
     {
         $kategoriMateri = KategoriMateri::all();
         return view('admin.kategori-materi.index', compact('kategoriMateri'));
+    }
+
+    public function publicIndex(){
+        $kategoris = KategoriMateri::latest()->paginate(4);
+        return view('kategori-materi.index', compact('kategoris'));
+    }
+    public function publicSearch(Request $request)
+    {	
+    	$kategoris = KategoriMateri::where(function($query) use ($request){
+    		$query->where('nama_kategori','like','%'.$request->keyword.'%');
+            // ->orWhere('deskripsi','like','%'.$request->keyword.'%');
+    	})->paginate(4);
+
+    	return view('kategori-materi.index',compact('kategoris'));
     }
 
     /**

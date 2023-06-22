@@ -34,38 +34,41 @@
             @endphp
 
             @foreach($materis as $date => $items)
-              <tr>
-                <td colspan="6"><h2>Hari ke-{{ $past->diffInDays($date) }}</h2></td>
-              </tr>
-              @foreach ($items as $art)
-              <tr>
-                <td>{{ $no++ }}</td>
-                <td>{{ $art->judul }}</td>
-                <td>{{ $art->user->name }}</td>
-                <td>{{ $art->kategoriMateri->nama_kategori }}</td>
-                <td>{{ (new \Illuminate\Support\Carbon($art->tersedia))->locale('id')->isoFormat('dddd, Do MMMM YYYY, h:mm') }}</td>
+            <tr>
+              <td colspan="6">
+                <h2>Hari ke-{{ $past->diffInDays($date) }}</h2>
+              </td>
+            </tr>
+            @foreach ($items as $art)
+            <tr>
+              <td>{{ $no++ }}</td>
+              <td><a href="{{ route('materi.show', $art->slug) }}">{{ $art->judul }}</a></td>
+              <td>{{ $art->user->name }}</td>
+              <td><a href="{{ route('admin.kategori-materi.show', $art->kategoriMateri->slug) }}">{{ $art->kategoriMateri->nama_kategori }}</a></td>
+              <td>{{ (new \Illuminate\Support\Carbon($art->tersedia))->locale('id')->isoFormat('dddd, Do MMMM YYYY,
+                h:mm') }}</td>
 
-                <td>
-                  @if(auth()->user()->id == $art->user_id)
-                  <div class="row ml-2">
-                    <a href="{{ route('admin.materi.edit',$art->id) }}" class="btn btn-primary btn-sm"><i
-                        class="fas fa-edit fa-fw"></i></a>
+              <td>
+                @if(auth()->user()->id == $art->user_id)
+                <div class="row ml-2">
+                  <a href="{{ route('admin.materi.edit',$art->id) }}" class="btn btn-primary btn-sm"><i
+                      class="fas fa-edit fa-fw"></i></a>
 
-                    <form method="POST" action="{{ route('admin.materi.destroy',$art->id) }}">
-                      @csrf
-                      @method('DELETE')
-                      <button onclick="return confirm('Yakin hapus ?')" type="submit"
-                        class="btn btn-danger btn-sm ml-2"><i class="fas fa-trash fa-fw"></i></button>
-                    </form>
-                  </div>
-                  @else
-                  <a href="javasript:void(0)" class="btn btn-danger btn-sm">
-                    <i class="fas fa-ban"></i> No Action Available
-                  </a>
-                  @endif
-                </td>
-              </tr>
-              @endforeach
+                  <form method="POST" action="{{ route('admin.materi.destroy',$art->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button onclick="return confirm('Yakin hapus ?')" type="submit"
+                      class="btn btn-danger btn-sm ml-2"><i class="fas fa-trash fa-fw"></i></button>
+                  </form>
+                </div>
+                @else
+                <a href="javasript:void(0)" class="btn btn-danger btn-sm">
+                  <i class="fas fa-ban"></i> No Action Available
+                </a>
+                @endif
+              </td>
+            </tr>
+            @endforeach
             @endforeach
           </tbody>
         </table>

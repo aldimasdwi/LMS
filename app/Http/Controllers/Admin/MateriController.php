@@ -33,7 +33,6 @@ class MateriController extends Controller
     public function index()
     {
         $materis = Materi::with(['user', 'kategoriMateri'])->orderBy('tersedia')->get()->groupBy('tersedia');
-        // dd($materi);
         return view('admin.materi.index', compact('materis'));
     }
 
@@ -79,9 +78,10 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $kategoriSlug, string $materiSlug)
     {
-        //
+        $materi = Materi::where('slug', $materiSlug)->first();
+        return view('materi.show', compact('materi'));
     }
 
     /**
@@ -90,8 +90,9 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Materi $materi)
+    public function edit(string $kategoriSlug, string $materiSlug)
     {
+        $materi = Materi::where('slug', $materiSlug)->first();
         $kategoriMateri = KategoriMateri::get();
         return view('admin.materi.edit', compact('materi', 'kategoriMateri'));
     }
@@ -128,13 +129,13 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materi $materi)
+    public function destroy(string $kategoriMateri, Materi $materi)
     {
         $this->authorize('delete', $materi);
 
         event(new MateriDeleteEvent($materi));
 
         $materi->delete();
-        return redirect()->route('admin.materi.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

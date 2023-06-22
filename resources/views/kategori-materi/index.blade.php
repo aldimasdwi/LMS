@@ -1,5 +1,5 @@
 @extends('layouts.frontend.app',[
-'title' => 'List Materi',
+'title' => 'List Kelas',
 ])
 @section('content')
 <!-- ##### Blog Area Start ##### -->
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-heading">
-                    <h3>List Materi</h3>
+                    <h3>List Kelas</h3>
                 </div>
             </div>
         </div>

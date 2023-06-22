@@ -76,7 +76,7 @@
     </div>
 </section>
 @endif
-
+{{-- 
 @if($materi->count() > 0)
 <!-- ##### Materi ##### -->
 <section class="blog-area section-padding-100-0 mb-50">
@@ -130,6 +130,6 @@
         </div>
     </div>
 </section>
-@endif
+@endif --}}
 
 @stop

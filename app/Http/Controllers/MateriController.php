@@ -12,9 +12,8 @@ class MateriController extends Controller
     public function index()
     {
     	// $materi = Materi::with(['user','kategoriMateri'])->latest()->paginate(4);
-    	$kategoris = KategoriMateri::latest()->paginate(4);
-
-    	return view('materi.index',['kategoris' => $kategoris]);
+    	$materis = Materi::latest()->paginate(4);
+    	return view('kategori-materi.index',['materis' => $materis]);
     }
 
     public function show(Materi $materi)

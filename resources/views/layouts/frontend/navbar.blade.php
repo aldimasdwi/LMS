@@ -25,7 +25,7 @@
                         <li><a href="/" class="{{ Request::is('/') || Request::is('home') ? 'text-primary' : '' }}">Home</a></li>
                         <li><a href="{{ route('about') }}" class="{{ Request::is('about') ? 'text-primary' : '' }}">Tentang</a></li>
                         <li><a href="{{ route('contact') }}" class="{{ Request::is('contact') ? 'text-primary' : '' }}">Kontak</a></li>
-                        <li><a href="{{ route('materi') }}" class="{{ Request::segment(1) == 'materi' ? 'text-primary' : '' }}">Materi</a></li>
+                        <li><a href="{{ route('kategori-materi.publicIndex') }}" class="{{ Request::segment(1) == 'kategori-materi' ? 'text-primary' : '' }}">Kelas</a></li>
                         <li><a href="{{ route('pengumuman') }}" class="{{ Request::segment(1) == 'pengumuman' ? 'text-primary' : '' }}">Pengumuman</a></li>
                         <li><a href="" class="{{ Request::is('agenda') ? 'text-primary' : '' }}">Agenda</a></li>
                         <li><a href="{{ route('pendaftaran') }}" class="{{ Request::is('pendaftaran') ? 'text-primary' : '' }}">Pendaftaran</a></li>
@@ -33,7 +33,7 @@
 
                     <!-- Search Button -->
                     <div class="search-area">
-                        <form action="{{ route('materi.search') }}" method="GET">
+                        <form action="{{ route('kategori-materi.publicSearch') }}" method="GET">
                             <input name="keyword" id="search" placeholder="Search">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>

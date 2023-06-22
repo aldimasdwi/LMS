@@ -37,15 +37,15 @@
                         </tr>
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td>{{ $materi->judul }}</td>
+                            <td><a href="{{ route('admin.kategori-materi.materi.show', [$kategori->slug, $materi->slug]) }}">{{ $materi->judul }}</a></td>
                             <td>{{ $materi->tersedia }}</td>
                             <td>
                                 <div class="row ml-2">
-                                    <a href="{{ route('admin.kategori-materi.edit',$materi->slug) }}"
+                                    <a href="{{ route('admin.kategori-materi.materi.edit',[$kategori->slug, $materi->id]) }}"
                                         class="btn btn-primary btn-sm"><i class="fas fa-edit fa-fw"></i></a>
 
                                     <form method="POST"
-                                        action="{{ route('admin.kategori-materi.destroy',$materi->slug) }}">
+                                        action="{{ route('admin.kategori-materi.materi.destroy',[$kategori->slug, $materi->id]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button onclick="return confirm('Yakin hapus ?')" type="submit"

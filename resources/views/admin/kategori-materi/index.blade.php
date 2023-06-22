@@ -32,7 +32,7 @@
                 @foreach($kategoriMateri as $ktgArt)
                 <tr>
                   <td>{{ $no++ }}</td>
-                  <td>{{ $ktgArt->nama_kategori }}</td>
+                  <td><a href="{{ route('admin.kategori-materi.show', $ktgArt->slug) }}">{{ $ktgArt->nama_kategori }}</a></td>
                   <td>{{ $ktgArt->deskripsi }}</td>
                   
                   <td>
