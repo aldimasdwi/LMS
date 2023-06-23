@@ -81,7 +81,7 @@ class MateriController extends Controller
     public function show(string $kategoriSlug, string $materiSlug)
     {
         $materi = Materi::where('slug', $materiSlug)->first();
-        return view('materi.show', compact('materi'));
+        return view('admin.materi.show', compact('materi'));
     }
 
     /**

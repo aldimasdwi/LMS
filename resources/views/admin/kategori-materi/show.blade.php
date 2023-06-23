@@ -37,8 +37,12 @@
                         </tr>
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td><a href="{{ route('admin.kategori-materi.materi.show', [$kategori->slug, $materi->slug]) }}">{{ $materi->judul }}</a></td>
-                            <td>{{ $materi->tersedia }}</td>
+                            <td><a
+                                    href="{{ route('admin.kategori-materi.materi.show', [$kategori->slug, $materi->slug]) }}">{{
+                                    $materi->judul }}</a></td>
+                            <td>{{ (new \Illuminate\Support\Carbon($materi->tersedia))->locale('id')->isoFormat('dddd,
+                                Do MMMM YYYY,
+                                h:mm') }}</td>
                             <td>
                                 <div class="row ml-2">
                                     <a href="{{ route('admin.kategori-materi.materi.edit',[$kategori->slug, $materi->id]) }}"

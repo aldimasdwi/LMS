@@ -49,10 +49,10 @@
                     </label>
                     @auth
                     <input value="{{ auth()->user()->name }}" type="text" class="form-control" id="name" name="name"
-                      placeholder="Masukan nama" disabled>
+                      placeholder="Masukkan nama" disabled>
                     @else
                     <input value="{{ old('name') }}" type="text" class="form-control" id="name" name="name"
-                      placeholder="Masukan nama">
+                      placeholder="Masukkan nama">
                     @endauth
                     @error('name')
                     <span class="text-danger">{{ $message }}</span>
@@ -188,20 +188,16 @@
                 </div>
                 <div class="col-md-6" id="department2">
                   <div class="form-group valid-form has-feedback">
-                    <label class="syarat" for="jurusan_yang_dituju">Jurusan Yang Dituju</label>
-                    <select class="form-control" name="jurusan_yang_dituju" id="jurusan_yang_dituju">
-                      <option value="">Pilih Jurusan</option>
-                      <option id="dprogrammer" value="Programmer">
-                        Pondok Programmer (Khusus Ikhwan)</option>
-                      <option id="dmultimedia" value="Multimedia">
-                        Pondok Multimedia (Khusus Ikhwan)
-                      </option>
-                      <option id="dimers" value="Imers">Pondok
-                        Marketer(Imers) Ikhwan / Akhwat</option>
-                      <option value="Enterpreneur">Pondok Enterpreneur (Khusus Ikhwan)</option>
-                      <option value="Manajer">Pondok Manajer (Khusus Ikhwan)</option>
+                    <label class="syarat" for="jurusan_id">Jurusan Yang Dituju</label>
+                    <select class="form-control" name="jurusan_id" id="jurusan_id">
+                      <option value="">-- Pilih Jurusan --</option>
+                      @foreach ($jurusans as $jurusan)
+                      <option value="{{ $jurusan->id }}">{{ \Illuminate\Support\Str::title($jurusan->name) }}</option>
+                      @endforeach
+                      {{-- <option value="Enterpreneur">Pondok Enterpreneur (Khusus Ikhwan)</option> --}}
+                      {{-- <option value="Manajer">Pondok Manajer (Khusus Ikhwan)</option> --}}
                     </select>
-                    @error('jurusan_yang_dituju')
+                    @error('jurusan_id')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                   </div>
@@ -262,8 +258,9 @@
                   <div class="form-group has-feedback">
                     <label class="syarat" for="email">Email</label>
                     @auth
-                    <input value="{{ auth()->user()->email }}" type="email" id="email" class="form-control input-disabled" name="email"
-                      placeholder="example@mail.com" style="padding-right: 42px;" disabled />
+                    <input value="{{ auth()->user()->email }}" type="email" id="email"
+                      class="form-control input-disabled" name="email" placeholder="example@mail.com"
+                      style="padding-right: 42px;" disabled />
                     @else
                     <input value="{{ old('email') }}" type="email" id="email" class="form-control" name="email"
                       placeholder="example@mail.com" style="padding-right: 42px;" />
@@ -433,24 +430,8 @@
             <div class="col-xl-6">
               <div class="form-group has-feedback">
                 <label class="syarat" for="jumlah_saudara">Jumlah Saudara</label>
-                <select class="form-control" name="jumlah_saudara" id="jumlah_saudara">
-                  <option value="tidak ada">tidak ada</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                </select>
+                <input class="form-control" type="number" name="jumlah_saudara" id="jumlah_saudara" placeholder="0"
+                  value="0">
                 @error('jumlah_saudara')
                 <span class="text-danger">{{ $message }}</span>
                 @enderror

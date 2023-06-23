@@ -16,8 +16,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.index',compact('users'));
+        $users = User::with(['personal_data', 'status', 'personal_data.jurusan'])->get();
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -40,7 +40,7 @@ class UsersController extends Controller
     {
         $request->request->add(['password' => bcrypt($request->password)]);
         User::create($request->all());
-        return redirect()->route('admin.users.index')->with('success','Data berhasil ditambah');
+        return redirect()->route('admin.users.index')->with('success', 'Data berhasil ditambah');
     }
 
     /**
@@ -62,7 +62,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit',compact('user'));   
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -76,7 +76,7 @@ class UsersController extends Controller
     {
         $request->request->add(['password' => $request->password ? bcrypt($request->password) : $request->old_password]);
         $user->update($request->all());
-        return redirect()->route('admin.users.index')->with('success','Data berhasil diupdate');
+        return redirect()->route('admin.users.index')->with('success', 'Data berhasil diupdate');
     }
 
     /**
@@ -88,6 +88,6 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success','Data berhasil dihapus');
+        return redirect()->route('admin.users.index')->with('success', 'Data berhasil dihapus');
     }
 }

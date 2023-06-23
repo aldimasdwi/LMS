@@ -6,6 +6,7 @@ use App\Http\Requests\PendaftaranRequest;
 use App\Models\Contact;
 use App\Models\Education;
 use App\Models\Family;
+use App\Models\Jurusan;
 use App\Models\Kuesioner;
 use App\Models\PersonalData;
 use App\Models\User;
@@ -21,7 +22,8 @@ class PendaftaranController extends Controller
 {
     public function index()
     {
-        return View::make('pendaftaran');
+        $jurusans = Jurusan::all();
+        return View::make('pendaftaran', compact('jurusans'));
     }
     public function adminIndex()
     {
@@ -30,15 +32,10 @@ class PendaftaranController extends Controller
     }
     public function daftar(PendaftaranRequest $request)
     {
-        $validator =  Validator::make($request->validated(), [
-        ]);
-        if (!Auth::check()){
-            // $valida
-        }
-
-        $validator->validate();
-
         $user = User::create($request->validated());
+
+        Auth::login($user);
+
         $validatedData = $request->safe()->merge(["user_id" => $user->id]);
 
         if ($request->has('photo')) {

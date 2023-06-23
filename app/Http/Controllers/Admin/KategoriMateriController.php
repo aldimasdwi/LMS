@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 
 use App\Models\KategoriMateri;
@@ -19,22 +20,23 @@ class KategoriMateriController extends Controller
      */
     public function index()
     {
-        $kategoriMateri = KategoriMateri::all();
+        $kategoriMateri = KategoriMateri::with(['jurusan'])->get();
         return view('admin.kategori-materi.index', compact('kategoriMateri'));
     }
 
-    public function publicIndex(){
+    public function publicIndex()
+    {
         $kategoris = KategoriMateri::latest()->paginate(4);
         return view('kategori-materi.index', compact('kategoris'));
     }
     public function publicSearch(Request $request)
-    {	
-    	$kategoris = KategoriMateri::where(function($query) use ($request){
-    		$query->where('nama_kategori','like','%'.$request->keyword.'%');
+    {
+        $kategoris = KategoriMateri::where(function ($query) use ($request) {
+            $query->where('nama_kategori', 'like', '%' . $request->keyword . '%');
             // ->orWhere('deskripsi','like','%'.$request->keyword.'%');
-    	})->paginate(4);
+        })->paginate(4);
 
-    	return view('kategori-materi.index',compact('kategoris'));
+        return view('kategori-materi.index', compact('kategoris'));
     }
 
     /**
@@ -44,7 +46,8 @@ class KategoriMateriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori-materi.create');
+        $jurusans = Jurusan::all();
+        return view('admin.kategori-materi.create', compact('jurusans'));
     }
 
     /**
@@ -58,6 +61,7 @@ class KategoriMateriController extends Controller
         KategoriMateri::create([
             'nama_kategori' => $request->nama_kategori,
             'slug' => Str::slug($request->nama_kategori),
+            'jurusan_id' => $request->jurusan_id
         ]);
         return redirect()->route('admin.kategori-materi.index')->with('success', 'Data berhasil ditambah');
     }
@@ -73,7 +77,7 @@ class KategoriMateriController extends Controller
         $kategori = KategoriMateri::with('materi')->where(compact('slug'))->first();
         $materi_pertama = $kategori->materi()->orderBy('tersedia')->first();
         return view('admin.kategori-materi.show', [
-            'kategori' => $kategori, 
+            'kategori' => $kategori,
             'materi_pertama' => new Carbon(!$materi_pertama ? '' : $materi_pertama->tersedia)
         ]);
     }

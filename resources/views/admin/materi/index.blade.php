@@ -42,9 +42,10 @@
             @foreach ($items as $art)
             <tr>
               <td>{{ $no++ }}</td>
-              <td><a href="{{ route('materi.show', $art->slug) }}">{{ $art->judul }}</a></td>
+              <td><a href="{{ route('admin.materi.show', $art->slug) }}">{{ $art->judul }}</a></td>
               <td>{{ $art->user->name }}</td>
-              <td><a href="{{ route('admin.kategori-materi.show', $art->kategoriMateri->slug) }}">{{ $art->kategoriMateri->nama_kategori }}</a></td>
+              <td><a href="{{ route('admin.kategori-materi.show', $art->kategoriMateri->slug) }}">{{
+                  $art->kategoriMateri->nama_kategori }}</a></td>
               <td>{{ (new \Illuminate\Support\Carbon($art->tersedia))->locale('id')->isoFormat('dddd, Do MMMM YYYY,
                 h:mm') }}</td>
 

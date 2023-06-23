@@ -23,7 +23,6 @@ class CreatePersonalDatasTable extends Migration
             $table->string('sudah_lulus_sekolah')->nullable();
             $table->string('tanggal_lahir')->nullable();
             $table->string('provinsi')->nullable();
-            $table->string('jurusan_yang_dituju')->nullable();
             $table->string('hobi')->nullable();
             $table->string('cita_cita')->nullable();
             $table->string('alamat_rumah')->nullable();

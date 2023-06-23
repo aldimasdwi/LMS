@@ -20,7 +20,6 @@ class PersonalData extends Model
         'sudah_lulus_sekolah',
         'tanggal_lahir',
         'provinsi',
-        'jurusan_yang_dituju',
         'hobi',
         'cita_cita',
         'alamat_rumah',

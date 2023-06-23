@@ -12,7 +12,7 @@ class Jurusan extends Model
     protected $table = 'jurusans';
 
     protected $fillable = [
-        'name',
+        'name', 'deskripsi'
     ];
 
     public function kategoriMateri()
