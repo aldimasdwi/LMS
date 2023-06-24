@@ -36,12 +36,12 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label>Kategori</label>
-                            <select required="" class="form-control" name="kategori_materi_id">
-                                <option disabled="">- PILIH KATEGORI -</option>
-                                @foreach($kategoriMateri as $kategori)
-                                <option value="{{ $kategori->id }}" {{ $materi->kategori_materi_id === $kategori->id ?
-                                    'selected' : '' }}>{{ $kategori->nama_kategori }}</option>
+                            <label>Kelas</label>
+                            <select required="" class="form-control" name="kelas_id">
+                                <option disabled="">- PILIH KELAS -</option>
+                                @foreach($kelas as $kelas)
+                                <option value="{{ $kelas->id }}" {{ $materi->kelas_id === $kelas->id ?
+                                    'selected' : '' }}>{{ $kelas->nama_kelas }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label for="tersedia">Tersedia</label>
                             <input type='text' class="form-control" id='tersedia' name="tersedia"
-                                placeholder="2023/06/14 16:35" value="{{ $materi->tersedia }}"/>
+                                placeholder="2023/06/14 16:35" value="{{ $materi->tersedia }}" />
                         </div>
                         @push('js')
                         <script type="text/javascript">

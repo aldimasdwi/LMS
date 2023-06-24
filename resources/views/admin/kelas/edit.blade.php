@@ -1,6 +1,6 @@
 @extends('layouts.backend.app',[
-'title' => 'Edit Kategori Materi',
-'contentTitle' => 'Edit Kategori Materi'
+'title' => 'Edit Kelas',
+'contentTitle' => 'Edit Kelas'
 ])
 @section('content')
 
@@ -13,12 +13,11 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                <a href="{{ route('admin.kategori-materi.index') }}" class="btn btn-success btn-sm">Kembali</a>
+                <a href="{{ route('admin.kelas.index') }}" class="btn btn-success btn-sm">Kembali</a>
             </h4>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data"
-                action="{{ route('admin.kategori-materi.update',$kategoriMateri->id) }}">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.kelas.update',$kelas->id) }}">
                 @csrf
                 @method('PATCH')
                 <div class="row">
@@ -33,14 +32,14 @@
                     </div>
                     <div class="col col-lg-6">
                         <div class="form-group">
-                            <label for="nama_kategori">Nama kategori</label>
-                            <input value="{{ $kategoriMateri->nama_kategori }}" required="" type="" name="nama_kategori"
-                                placeholder="" class="form-control">
+                            <label for="nama_kelas">Nama kelas</label>
+                            <input value="{{ $kelas->nama_kelas }}" required="" type="" name="nama_kelas" placeholder=""
+                                class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="nama_kategori">Deskripsi kategori</label>
-                            <input value="{{ $kategoriMateri->deskripsi }}" required="" type="" name="deskripsi"
-                                placeholder="" class="form-control">
+                            <label for="nama_kelas">Deskripsi kelas</label>
+                            <input value="{{ $kelas->deskripsi }}" required="" type="" name="deskripsi" placeholder=""
+                                class="form-control">
                         </div>
                     </div>
                 </div>

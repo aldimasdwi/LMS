@@ -32,11 +32,11 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label>Kategori</label>
-                            <select required="" class="form-control" name="kategori_materi_id">
-                                <option selected="" disabled="">- PILIH KATEGORI -</option>
-                                @foreach($kategoriMateri as $kategori)
-                                <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                            <label>Kelas</label>
+                            <select required="" class="form-control" name="kelas_id">
+                                <option selected="" disabled="">- PILIH KELAS -</option>
+                                @foreach($kelass as $kelas)
+                                <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -45,13 +45,16 @@
                             <input type='text' class="form-control" id='tersedia' name="tersedia"
                                 placeholder="2023/06/14 16:35" />
                         </div>
-                        @push('js')
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#tersedia').datetimepicker();
-                            });
-                        </script>
-                        @endpush
+                        <div class="form-group">
+                            <label for="tab_materi">Tab</label>
+                            <input type='text' class="form-control" id='tab_materi' name="tab_materi"
+                                list="tab-materi-data" value="{{ old('tab_materi') }}" />
+                            <datalist id="tab-materi-data">
+                                @foreach ($tabMateris as $tab)
+                                <option value="{{ $tab->judul }}"></option>
+                                @endforeach
+                            </datalist>
+                        </div>
                     </div>
                 </div>
                 <div id="form-group">
@@ -72,6 +75,11 @@
 @push('js')
 <script type="text/javascript" src="{{ asset('plugins/summernote') }}/summernote-bs4.min.js"></script>
 <script type="text/javascript" src="{{ asset('plugins/dropify') }}/dist/js/dropify.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#tersedia').datetimepicker();
+    });
+</script>
 <script type="text/javascript">
     $(".summernote").summernote({
         height:500,

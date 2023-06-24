@@ -12,20 +12,20 @@ class HomeController extends Controller
 {
     public function index()
     {
-    	return view('home.index',[
+        return view('home.index', [
             'agenda' => Agenda::latest()->take(2)->get(),
-            'materi' => Materi::with(['user','kategoriMateri'])->latest()->take(2)->get(),
+            'materi' => Materi::with(['user', 'kelas'])->latest()->take(2)->get(),
             'pengumuman' => Pengumuman::with(['user'])->latest()->take(2)->get(),
         ]);
     }
 
     public function about()
     {
-    	return view('home.about');
+        return view('home.about');
     }
 
     public function contact()
     {
-    	return view('home.contact');
+        return view('home.contact');
     }
 }

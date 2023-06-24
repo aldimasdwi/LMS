@@ -21,21 +21,22 @@
         </div>
 
         <div class="row">
-            @foreach($kategoris as $kategori)
+            @foreach($kelass as $kelas)
             <div class="col-md-4 mb-3">
                 <div class="card">
                     @php
-                    $thumbnail = $kategori->thumbnail ?? 'default-materi-thumbnail.png';
+                    $thumbnail = $kelas->thumbnail ?? 'default-materi-thumbnail.png';
                     @endphp
                     <img class="card-img-top" src="{{ asset('uploads/img/materi/'.$thumbnail) }}" width="100%"
                         style="height: 300px; object-fit: cover; object-position: center;">
                     <div class="card-body">
-                        <a class="stretched-link fs-3 text-capitalize w-100 text-center d-block" href="{{ route('admin.kategori-materi.show',$kategori->slug) }}">
-                            {{ $kategori->nama_kategori }}
+                        <a class="stretched-link fs-3 text-capitalize w-100 text-center d-block"
+                            href="{{ route('admin.kelas.show',$kelas->slug) }}">
+                            {{ $kelas->nama_kelas }}
                         </a>
                     </div>
                     {{-- @php
-                    $available = new \Illuminate\Support\Carbon($kategori->tersedia);
+                    $available = new \Illuminate\Support\Carbon($kelas->tersedia);
                     $isAvailable = $available->lessThanOrEqualTo(now());
                     @endphp
                     @if (!$isAvailable)
@@ -46,10 +47,9 @@
             </div>
             @endforeach
             <div class="col-lg pagination pagination-center justify-content-center">
-                {{ $kategoris->appends(Request::all())->links() }}
+                {{ $kelass->appends(Request::all())->links() }}
             </div>
         </div>
     </div>
 </section>
 @stop
-

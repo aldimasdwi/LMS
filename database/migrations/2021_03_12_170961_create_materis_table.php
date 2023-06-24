@@ -20,7 +20,8 @@ class CreateMaterisTable extends Migration
             $table->text('deskripsi')->nullable();
             $table->string('thumbnail')->nullable();
             $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('kategori_materi_id')->nullable();
+            $table->foreignId('kelas_id')->references('id')->on('kelass')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('tab_materi_id')->references('id')->on('tab_materis')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('tersedia')->nullable();
             $table->timestamps();
         });

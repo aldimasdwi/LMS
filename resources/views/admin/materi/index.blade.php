@@ -22,7 +22,7 @@
               <th>No</th>
               <th>Judul</th>
               <th>Author</th>
-              <th>Kategori</th>
+              <th>Kelas</th>
               <th>Tersedia</th>
               <th>Action</th>
             </tr>
@@ -44,8 +44,8 @@
               <td>{{ $no++ }}</td>
               <td><a href="{{ route('admin.materi.show', $art->slug) }}">{{ $art->judul }}</a></td>
               <td>{{ $art->user->name }}</td>
-              <td><a href="{{ route('admin.kategori-materi.show', $art->kategoriMateri->slug) }}">{{
-                  $art->kategoriMateri->nama_kategori }}</a></td>
+              <td><a href="{{ route('admin.kelas.show', $art->kelas->slug) }}">{{
+                  $art->kelas->nama_kelas }}</a></td>
               <td>{{ (new \Illuminate\Support\Carbon($art->tersedia))->locale('id')->isoFormat('dddd, Do MMMM YYYY,
                 h:mm') }}</td>
 

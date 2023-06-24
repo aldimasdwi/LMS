@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\User;
-use App\Models\KategoriMateri;
+use App\Models\Kelas;
 use Illuminate\Support\Carbon;
 
 class Materi extends Model
@@ -16,7 +16,14 @@ class Materi extends Model
     protected $table = 'materis';
 
     protected $fillable = [
-        'judul', 'slug', 'deskripsi', 'thumbnail', 'user_id', 'kategori_materi_id', 'tersedia',
+        'judul',
+        'slug',
+        'deskripsi',
+        'thumbnail',
+        'user_id',
+        'kelas_id',
+        'tersedia',
+        'tab_materi_id',
     ];
 
     public function user()
@@ -24,9 +31,9 @@ class Materi extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function kategoriMateri()
+    public function kelas()
     {
-        return $this->belongsTo(KategoriMateri::class);
+        return $this->belongsTo(Kelas::class);
     }
 
     public function getThumbnail()

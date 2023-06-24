@@ -1,6 +1,6 @@
 @extends('layouts.backend.app',[
-'title' => 'Tambah Kategori Materi',
-'contentTitle' => 'Tambah Kategori Materi'
+'title' => 'Tambah Kelas',
+'contentTitle' => 'Tambah Kelas'
 ])
 @section('content')
 
@@ -13,11 +13,11 @@
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">
-                <a href="{{ route('admin.kategori-materi.index') }}" class="btn btn-success btn-sm">Kembali</a>
+                <a href="{{ route('admin.kelas.index') }}" class="btn btn-success btn-sm">Kembali</a>
             </h4>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.kategori-materi.store') }}">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.kelas.store') }}">
                 @csrf
 
                 <div class="row">
@@ -30,12 +30,11 @@
                     </div>
                     <div class="col col-lg-6">
                         <div class="form-group">
-                            <label for="nama_kategori">Nama kategori</label>
-                            <input value="" required="" type="" name="nama_kategori" placeholder=""
-                                class="form-control">
+                            <label for="nama_kelas">Nama kelas</label>
+                            <input value="" required="" type="" name="nama_kelas" placeholder="" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="nama_kategori">Deskripsi kategori</label>
+                            <label for="nama_kelas">Deskripsi kelas</label>
                             <input value="" required="" type="" name="deskripsi" placeholder="" class="form-control">
                         </div>
                         <div class="form-group">

@@ -17,12 +17,13 @@ class MateriFactory extends Factory
     {
         $title = $this->faker->words(5, true);
         return [
-            'judul' => $title, 
-            'slug' => Str::slug($title), 
-            'deskripsi' => $this->faker->text(), 
-            'thumbnail' => 'default-thumbnail.jpg', 
-            'user_id' => 1, 
-            'kategori_materi_id' => 1, 
+            'judul' => $title,
+            'slug' => Str::slug($title),
+            'deskripsi' => $this->faker->text(),
+            'thumbnail' => 'default-thumbnail.jpg',
+            'user_id' => 1,
+            'kelas_id' => 1,
+            'tab_materi_id' => $this->faker->numberBetween(1, 2),
             'tersedia' => $this->faker->date('Y-m-d'),
         ];
     }

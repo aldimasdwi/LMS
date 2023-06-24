@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Jurusan extends Model
+class TabMateri extends Model
 {
     use HasFactory;
 
-    protected $table = 'jurusans';
-
     protected $fillable = [
-        'name', 'deskripsi'
+        'judul', 'kelas_id'
     ];
 
-    public function kelas()
+    public $timestamps = false;
+
+    public function materi()
     {
-        return $this->hasMany(Kelas::class);
+        return $this->hasMany(Materi::class);
     }
 }

@@ -36,7 +36,7 @@ Password : password
 - Manage Materi (CRUD)
 - Manage Agenda (CRUD)
 - Manage Pengumuman (CRUD)
-- Manage Kategori Materi (CRUD)
+- Manage Kelas (CRUD)
 
 ## Author
 - Rahmat Hidayatullah

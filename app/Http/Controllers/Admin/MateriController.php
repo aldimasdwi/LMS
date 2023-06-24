@@ -8,7 +8,8 @@ use App\Events\MateriDeleteEvent;
 use App\Services\SummernoteService;
 use App\Services\UploadService;
 use App\Models\Materi;
-use App\Models\KategoriMateri;
+use App\Models\Kelas;
+use App\Models\TabMateri;
 use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Carbon;
@@ -32,7 +33,7 @@ class MateriController extends Controller
      */
     public function index()
     {
-        $materis = Materi::with(['user', 'kategoriMateri'])->orderBy('tersedia')->get()->groupBy('tersedia');
+        $materis = Materi::with(['user', 'kelas'])->orderBy('tersedia')->get()->groupBy('tersedia');
         return view('admin.materi.index', compact('materis'));
     }
 
@@ -43,8 +44,9 @@ class MateriController extends Controller
      */
     public function create()
     {
-        $kategoriMateri = KategoriMateri::all();
-        return view('admin.materi.create', compact('kategoriMateri'));
+        $kelass = Kelas::all();
+        $tabMateris = TabMateri::all();
+        return view('admin.materi.create', compact('kelass', 'tabMateris'));
     }
 
     /**
@@ -57,8 +59,11 @@ class MateriController extends Controller
     {
         $request->validate([
             'tersedia' => ['regex:/^\d{4}\/\d{2}\/\d{2} ([01]\d|2[0-3]):[0-5]\d$/', 'required'],
-            'kategori_materi_id' => 'required'
+            'kelas_id' => 'required',
+            'tab_materi' => 'required',
         ]);
+
+        $tabMateri = TabMateri::firstOrCreate($request->only(['jurusan_id', 'kelas_id']));
 
         Materi::create([
             'judul' => $request->judul,
@@ -67,7 +72,8 @@ class MateriController extends Controller
             'slug' => Str::slug($request->judul),
             'user_id' => auth()->user()->id,
             'tersedia' => $request->tersedia ?? now(),
-            'kategori_materi_id' => $request->kategori_materi_id,
+            'kelas_id' => $request->kelas_id,
+            'tab_materi_id' => $tabMateri->id
         ]);
         return redirect()->route('admin.materi.index')->with('success', 'Data berhasil ditambah');
     }
@@ -78,7 +84,7 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(string $kategoriSlug, string $materiSlug)
+    public function show(string $kelasSlug, string $materiSlug)
     {
         $materi = Materi::where('slug', $materiSlug)->first();
         return view('admin.materi.show', compact('materi'));
@@ -90,11 +96,11 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(string $kategoriSlug, string $materiSlug)
+    public function edit(string $kelasSlug, string $materiSlug)
     {
         $materi = Materi::where('slug', $materiSlug)->first();
-        $kategoriMateri = KategoriMateri::get();
-        return view('admin.materi.edit', compact('materi', 'kategoriMateri'));
+        $kelas = Kelas::get();
+        return view('admin.materi.edit', compact('materi', 'kelas'));
     }
 
     /**
@@ -114,7 +120,7 @@ class MateriController extends Controller
             'slug' => Str::slug($request->judul),
             'user_id' => auth()->user()->id,
             'tersedia' => $request->tersedia ?? now(),
-            'kategori_materi_id' => $request->kategori_materi_id,
+            'kelas_id' => $request->kelas_id,
         ];
         foreach ($requestBody as $key => $value) {
             $materi[$key] = $value;
@@ -129,7 +135,7 @@ class MateriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $kategoriMateri, Materi $materi)
+    public function destroy(string $kelas, Materi $materi)
     {
         $this->authorize('delete', $materi);
 

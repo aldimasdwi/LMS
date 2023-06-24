@@ -30,8 +30,8 @@
                                 class="{{ Request::is('about') ? 'text-primary' : '' }}">Tentang</a></li>
                         <li><a href="{{ route('contact') }}"
                                 class="{{ Request::is('contact') ? 'text-primary' : '' }}">Kontak</a></li>
-                        <li><a href="{{ route('kategori-materi.publicIndex') }}"
-                                class="{{ Request::segment(1) == 'kategori-materi' ? 'text-primary' : '' }}">Kelas</a>
+                        <li><a href="{{ route('kelas.publicIndex') }}"
+                                class="{{ Request::segment(1) == 'kelas' ? 'text-primary' : '' }}">Kelas</a>
                         </li>
                         <li><a href="{{ route('pengumuman') }}"
                                 class="{{ Request::segment(1) == 'pengumuman' ? 'text-primary' : '' }}">Pengumuman</a>
@@ -43,7 +43,7 @@
 
                     <!-- Search Button -->
                     <div class="search-area">
-                        <form action="{{ route('kategori-materi.publicSearch') }}" method="GET">
+                        <form action="{{ route('kelas.publicSearch') }}" method="GET">
                             <input name="keyword" id="search" placeholder="Search">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>

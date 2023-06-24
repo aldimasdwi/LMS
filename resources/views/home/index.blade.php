@@ -76,7 +76,7 @@
     </div>
 </section>
 @endif
-{{-- 
+{{--
 @if($materi->count() > 0)
 <!-- ##### Materi ##### -->
 <section class="blog-area section-padding-100-0 mb-50">
@@ -110,11 +110,11 @@
                             {{ Str::limit(strip_tags($art->deskripsi)) }}
                         </div>
                         @if ($isAvailable)
-                            <a href="{{ route('materi.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                        <a href="{{ route('materi.show',$art->slug) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
                         @endif
                     </div>
                     <div class="card-footer">
-                        <span class="badge badge-primary float-right">kategori : {{ $art->kategoriMateri->nama_kategori
+                        <span class="badge badge-primary float-right">kelas : {{ $art->kelas->nama_kelas
                             }}</span>
                         @if (!$isAvailable)
                         <span class="badge badge-success float-right">Tersedia

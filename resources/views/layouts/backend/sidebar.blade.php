@@ -3,7 +3,7 @@
   <!-- Brand Logo -->
   <a href="/" class="brand-link">
     <img src="{{ asset('img/icons') }}/laravel.jpg" alt="laravel Logo" class="brand-image img-circle elevation-3"
-         style="opacity: .8">
+      style="opacity: .8">
     <span class="brand-text font-weight-light">Laraschool</span>
   </a>
 
@@ -32,7 +32,8 @@
         </li>
         <li class="nav-header">MANAGE DATA</li>
         <li class="nav-item">
-          <a href="{{ route('admin.users.index') }}" class="nav-link {{ Request::segment(2) == 'users' ? 'active' : '' }}">
+          <a href="{{ route('admin.users.index') }}"
+            class="nav-link {{ Request::segment(2) == 'users' ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Users
@@ -40,7 +41,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.materi.index') }}" class="nav-link {{ Request::segment(2) == 'materi' ? 'active' : '' }}">
+          <a href="{{ route('admin.materi.index') }}"
+            class="nav-link {{ Request::segment(2) == 'materi' ? 'active' : '' }}">
             <i class="nav-icon far fa-image"></i>
             <p>
               Materi
@@ -48,15 +50,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.kategori-materi.index') }}" class="nav-link {{ Request::segment(2) == 'kategori-materi' ? 'active' : '' }}">
+          <a href="{{ route('admin.kelas.index') }}"
+            class="nav-link {{ Request::segment(2) == 'kelas' ? 'active' : '' }}">
             <i class="nav-icon far fa-circle"></i>
             <p>
-              Kategori Materi
+              Kelas
             </p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.pengumuman.index') }}" class="nav-link {{ Request::segment(2) == 'pengumuman' ? 'active' : '' }}">
+          <a href="{{ route('admin.pengumuman.index') }}"
+            class="nav-link {{ Request::segment(2) == 'pengumuman' ? 'active' : '' }}">
             <i class="nav-icon fas fa-info"></i>
             <p>
               Pengumuman
@@ -64,7 +68,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.agenda.index') }}" class="nav-link {{ Request::segment(2) == 'agenda' ? 'active' : '' }}">
+          <a href="{{ route('admin.agenda.index') }}"
+            class="nav-link {{ Request::segment(2) == 'agenda' ? 'active' : '' }}">
             <i class="nav-icon fas fa-list"></i>
             <p>
               Agenda
@@ -72,7 +77,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.pendaftaran.index') }}" class="nav-link {{ Request::segment(2) == 'agenda' ? 'active' : '' }}">
+          <a href="{{ route('admin.pendaftaran.index') }}"
+            class="nav-link {{ Request::segment(2) == 'agenda' ? 'active' : '' }}">
             <i class="nav-icon fa fa-book"></i>
             <p>
               Pendaftaran
@@ -82,7 +88,8 @@
 
         <li class="nav-header">PENGATURAN</li>
         <li class="nav-item">
-          <a href="{{ route('admin.profile.index') }}" class="nav-link {{ Request::is('admin/profile') ? 'active' : '' }}">
+          <a href="{{ route('admin.profile.index') }}"
+            class="nav-link {{ Request::is('admin/profile') ? 'active' : '' }}">
             <i class="nav-icon fas fa-id-card"></i>
             <p>
               Profil
@@ -90,7 +97,8 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.change-password.index') }}" class="nav-link {{ Request::is('admin/change-password') ? 'active' : '' }}">
+          <a href="{{ route('admin.change-password.index') }}"
+            class="nav-link {{ Request::is('admin/change-password') ? 'active' : '' }}">
             <i class="nav-icon fas fa-unlock"></i>
             <p>
               Ubah Password
