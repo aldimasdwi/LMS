@@ -51,7 +51,7 @@
                         <div id="collapse{{$loop->iteration}}" role="tabpanel"
                             aria-labelledby="heading{{$loop->iteration}}" class="collapse show">
                             <div class="card-body">
-                                @foreach ($tab->materi as $materi)
+                                @forelse ($tab->materi as $materi)
                                 <ul class="list-group">
                                     <li class="list-group-item col">
                                         <span>
@@ -62,7 +62,13 @@
                                         </span>
                                     </li>
                                 </ul>
-                                @endforeach
+                                @empty
+                                <ul class="list-group">
+                                    <li class="list-group-item col">
+                                        <span>Belum ada materi</span>
+                                    </li>
+                                </ul>
+                                @endforelse
                             </div>
                         </div>
                     </div>

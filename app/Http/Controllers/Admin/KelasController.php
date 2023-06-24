@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\Materi;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
 class KelasController extends Controller
@@ -26,8 +27,7 @@ class KelasController extends Controller
 
     public function publicIndex()
     {
-        $kelass = Kelas::latest()->paginate(4);
-        return view('kelas.index', compact('kelass'));
+        return Redirect::route('admin.kelas.index');
     }
     public function publicSearch(Request $request)
     {

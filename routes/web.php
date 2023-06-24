@@ -39,7 +39,6 @@ Route::post('/pendaftaran', [PendaftaranController::class, 'daftar']);
 
 //Materi
 Route::get('/kelas', [KelasController::class, 'publicIndex'])->name('kelas.publicIndex');
-Route::get('/kelas/search', [KelasController::class, 'publicSearch'])->name('kelas.publicSearch');
 // Route::get('/materi/search',[MateriController::class,'search'])->name('materi.search');
 
 // Route::get('/materi/{materi:slug}',[MateriController::class,'show'])->name('materi.show');
