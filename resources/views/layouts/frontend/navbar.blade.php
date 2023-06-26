@@ -42,12 +42,12 @@
                     </ul>
 
                     <!-- Search Button -->
-                    <div class="search-area">
+                    {{-- <div class="search-area">
                         <form action="{{ route('kelas.publicSearch') }}" method="GET">
                             <input name="keyword" id="search" placeholder="Search">
                             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
-                    </div>
+                    </div> --}}
 
                     @auth
                     <div class="login-state d-flex align-items-center">

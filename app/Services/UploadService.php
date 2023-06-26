@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Services;
 
@@ -9,8 +9,8 @@ class UploadService
 	public function imageUpload($path)
 	{
 		$file = request()->file('file');
-		$filename = Str::random(9).$file->getClientOriginalName();
-		$file->move(public_path('uploads/img/'.$path),$filename);
+		$filename = Str::random(9) . $file->getClientOriginalName();
+		$file->move(public_path('uploads/img/' . $path), $filename);
 
 		return $filename;
 	}

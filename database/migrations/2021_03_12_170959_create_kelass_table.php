@@ -17,7 +17,7 @@ class CreateKelassTable extends Migration
             $table->id();
             $table->string('nama_kelas')->nullable();
             $table->foreignId('jurusan_id')->references('id')->on('jurusans');
-            $table->string('thumbnail')->default('no-thumbnail.jpg');
+            $table->string('thumbnail')->default('/uploads/img/' . config('app.default_filename_kelas_thumbnail'));
             $table->string('slug')->nullable();
         });
     }

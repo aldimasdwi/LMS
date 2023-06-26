@@ -28,20 +28,10 @@
             </tr>
           </thead>
           <tbody>
-            @php
-            $no=1;
-            $past = new \Illuminate\Support\Carbon($materis->keys()[0])
-            @endphp
-
             @foreach($materis as $date => $items)
-            <tr>
-              <td colspan="6">
-                <h2>Hari ke-{{ $past->diffInDays($date) }}</h2>
-              </td>
-            </tr>
             @foreach ($items as $art)
             <tr>
-              <td>{{ $no++ }}</td>
+              <td>{{ $loop->parent->iteration }}</td>
               <td><a href="{{ route('admin.materi.show', $art->slug) }}">{{ $art->judul }}</a></td>
               <td>{{ $art->user->name }}</td>
               <td><a href="{{ route('admin.kelas.show', $art->kelas->slug) }}">{{

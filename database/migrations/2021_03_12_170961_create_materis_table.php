@@ -18,7 +18,7 @@ class CreateMaterisTable extends Migration
             $table->string('judul')->nullable();
             $table->string('slug')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail')->default('/uploads/img/' . config('app.default_filename_materi_thumbnail'));
             $table->bigInteger('user_id')->nullable();
             $table->foreignId('kelas_id')->references('id')->on('kelass')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('tab_materi_id')->references('id')->on('tab_materis')->cascadeOnDelete()->cascadeOnUpdate();

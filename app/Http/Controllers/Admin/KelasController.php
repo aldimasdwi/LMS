@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 
 use App\Models\Kelas;
 use App\Models\Materi;
+use App\Services\SummernoteService;
+use App\Services\UploadService;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
 class KelasController extends Controller
 {
+
+    public function __construct(private SummernoteService $summernoteService, private UploadService $uploadService)
+    {
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,21 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelass = Kelas::with(['jurusan'])->get();
+        $STATUS = [
+            "PENDAFTARAN" => 1,
+            "ADMIN" => 2,
+            "SANTRI" => 3,
+            "ALUMNI" => 4
+        ];
+        $santri = Auth::user();
+        $santriIsAdmin = $santri->status_id == $STATUS["ADMIN"];
+        $adminQuery = fn ($query) => $query;
+        $santriQuery = function ($query) use ($santri) {
+            return $query->where('jurusan_id', $santri->personal_data->jurusan_id);
+        };
+
+        $kelass = Kelas::with(['jurusan'])->when($santriIsAdmin, $adminQuery, $santriQuery)->get();
+        // dd($kelass->toArray());
         return view('admin.kelas.index', compact('kelass'));
     }
 
@@ -61,7 +82,8 @@ class KelasController extends Controller
         Kelas::create([
             'nama_kelas' => $request->nama_kelas,
             'slug' => Str::slug($request->nama_kelas),
-            'jurusan_id' => $request->jurusan_id
+            'jurusan_id' => $request->jurusan_id,
+            'thumbnail' => $this->uploadService->imageUpload(config('app.default_dir_path_kelas_thumbnail'))
         ]);
         return redirect()->route('admin.kelas.index')->with('success', 'Data berhasil ditambah');
     }

@@ -17,13 +17,9 @@ use Illuminate\Support\Facades\Validator;
 
 class MateriController extends Controller
 {
-    private $summernoteService;
-    private $uploadService;
 
-    public function __construct(SummernoteService $summernoteService, UploadService $uploadService)
+    public function __construct(private SummernoteService $summernoteService, private UploadService $uploadService)
     {
-        $this->summernoteService = $summernoteService;
-        $this->uploadService = $uploadService;
     }
 
     /**
@@ -67,8 +63,8 @@ class MateriController extends Controller
 
         Materi::create([
             'judul' => $request->judul,
-            'deskripsi' => $this->summernoteService->imageUpload('materi'),
-            'thumbnail' => $this->uploadService->imageUpload('materi'),
+            'deskripsi' => $this->summernoteService->imageUpload(config('app.default_dir_path_materi_thumbnail')),
+            'thumbnail' => $this->uploadService->imageUpload(config('app.default_dir_path_materi_thumbnail')),
             'slug' => Str::slug($request->judul),
             'user_id' => auth()->user()->id,
             'tersedia' => $request->tersedia ?? now(),

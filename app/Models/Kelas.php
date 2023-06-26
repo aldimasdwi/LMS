@@ -12,8 +12,10 @@ class Kelas extends Model
 
     protected $table = 'kelass';
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'nama_kelas', 'slug', 'jurusan_id'
+        'nama_kelas', 'slug', 'jurusan_id', 'thumbnail'
     ];
 
     public function materi()

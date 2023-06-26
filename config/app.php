@@ -4,6 +4,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Custom Configuration
+    |--------------------------------------------------------------------------
+    |
+    */
+    'default_dir_path_kelas_thumbnail' => env('DEFAULT_DIR_PATH_KELAS_THUMBNAIL', 'kelas'),
+    'default_dir_path_materi_thumbnail' => env('DEFAULT_DIR_PATH_MATERI_THUMBNAIL', 'materi'),
+    'default_filename_kelas_thumbnail' => env('DEFAULT_DIR_PATH_KELAS_THUMBNAIL', 'no-image.png'),
+    'default_filename_materi_thumbnail' => env('DEFAULT_DIR_PATH_MATERI_THUMBNAIL', 'no-image.png'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
     |
