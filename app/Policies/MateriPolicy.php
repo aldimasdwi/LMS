@@ -53,7 +53,7 @@ class MateriPolicy
      */
     public function update(User $user, Materi $materi)
     {
-        return $user->id == $materi->user_id;   
+        return $user->isAdmin();
     }
 
     /**
@@ -65,7 +65,7 @@ class MateriPolicy
      */
     public function delete(User $user, Materi $materi)
     {
-        return $user->id == $materi->user_id;   
+        return $user->isAdmin();
     }
 
     /**

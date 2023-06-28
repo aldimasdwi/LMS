@@ -16,7 +16,8 @@
             <h4 class="card-title">Box Materi</h4>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.materi.update',$materi->slug) }}">
+            <form method="POST" enctype="multipart/form-data"
+                action="{{ route('admin.kelas.materi.update', [request()->route('kelas'), $materi->slug]) }}">
                 @method("PUT")
                 @csrf
                 <div class="form-group">

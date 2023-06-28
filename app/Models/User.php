@@ -47,10 +47,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function booted(){
+    public static function booted()
+    {
         self::creating(function ($user) {
             $user->status_id = 3;
         });
+    }
+    public function isAdmin()
+    {
+        return $this->status_id = 2;
     }
     public function materi()
     {

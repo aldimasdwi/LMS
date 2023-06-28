@@ -61,9 +61,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         Route::resource('agenda', 'AgendaController');
         Route::resource('kelas', 'KelasController')->parameters([
             'kelas' => 'kelas',
-        ])->scoped(['kelas' => 'slug']);
+        ])->scoped([
+            'kelas' => 'slug'
+        ]);
         Route::resource('kelas.materi', 'MateriController')->parameters([
-            'kelas' => 'kelas'
+            'kelas' => 'kelas',
+            'materi' => 'materi',
+        ])->scoped([
+            'kelas' => 'slug',
+            'materi' => 'slug',
         ]);
 
         // Pendaftaran

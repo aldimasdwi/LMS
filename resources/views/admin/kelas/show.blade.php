@@ -2,6 +2,7 @@
 'title' => 'Manage Kelas',
 'contentTitle' => 'Manage Kelas',
 ])
+
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet"
@@ -17,30 +18,6 @@
             <a href="{{ route('admin.kelas.materi.create', request()->route('kelas')) }}"
                 class="btn btn-primary btn-sm">Tambah Data</a>
         </div>
-    </div>
-
-    <div id="info_kelas" role="tabpanel" class="tab-pane">
-        <p>Tanggal Mulai Kelas : 02 Mei 2023</p>
-        <p>Tanggal Selesai Kelas : 23 Juni 2023</p> <span>
-            <p>Link channel materi :
-                <button type="button" class="btn btn-sm btn-primary waves-effect waves-light">
-                    <!---->
-                    Join Channel
-                </button>
-            </p>
-        </span> <span>
-            <p>Link grup diskusi :
-                <button type="button" class="btn btn-sm btn-primary waves-effect waves-light">
-                    <!---->
-                    Join Diskusi
-                </button>
-            </p>
-        </span> <i>*Link channel materi telegram akan diupdate pada H-7 dan link grup diskusi akan diupdate H-1 sebelum
-            kelas dimulai menyesuaikan jumlah peserta...</i><br> <i>**Apabila ada kendala, dapat menghubungi trainer
-            bersangkutan atau <a href="https://t.me/pksdigischool" target="_blank"><u>admin telegram</u></a></i><br>
-        <span>
-            <!---->
-        </span>
     </div>
     <div id="materi" role="tabpanel" class="tab-pane active show">
         <div id="accordion2" role="tablist" aria-multiselectable="true" class="accordion">
@@ -58,29 +35,35 @@
                         </div>
                         <div id="collapse{{$loop->iteration}}" role="tabpanel"
                             aria-labelledby="heading{{$loop->iteration}}" class="collapse show">
-                            <div class="card-body">
-                                @forelse ($tab->materi as $materi)
-                                <ul class="list-group">
-                                    <li class="list-group-item col">
-                                        <span class="d-flex justify-content-between">
-                                            <a href="{{ route('admin.kelas.materi.show', [$kelass->slug, $materi->slug]) }}"
-                                                target="_blank">
-                                                <u>{{ $materi->judul }}</u>
+                            <div class=" card-body list-group">
+                                <ul>
+                                    @forelse ($tab->materi->sortBy('tersedia') as $materi)
+                                    <div class="d-flex flex-row align-items-center">
+                                        <a class="list-group-item flex-fill"
+                                            href="{{ route('admin.kelas.materi.show', [$kelass->slug, $materi->slug]) }}">
+                                            <u>{{ $materi->judul }}</u>
+                                        </a>
+                                        <p class="list-group-item">{{ $materi->tersedia }}</p>
+                                        <span class=" list-group-item d-flex">
+                                            <a class="btn btn-info"
+                                                href="{{ route('admin.kelas.materi.edit', [$kelass->slug, $materi->slug]) }}">
+                                                <u>Edit</u>
                                             </a>
-                                            <a href="{{ route('admin.kelas.materi.show', [$kelass->slug, $materi->slug]) }}"
-                                                target="_blank">
-                                                <u>{{ $materi->tersedia }}</u>
+                                            <a href="javascript:void(0)" class="btn btn-danger" data-toggle="modal"
+                                                data-target="#deleteModal">Hapus
                                             </a>
+                                            @include('layouts.backend.materi-modal', ['materi' => $materi, 'kelass' =>
+                                            $kelass])
                                         </span>
-                                    </li>
+                                    </div>
+                                    @empty
+                                    <ul class="list-group">
+                                        <li class="list-group-item col">
+                                            <span>Belum ada materi</span>
+                                        </li>
+                                    </ul>
+                                    @endforelse
                                 </ul>
-                                @empty
-                                <ul class="list-group">
-                                    <li class="list-group-item col">
-                                        <span>Belum ada materi</span>
-                                    </li>
-                                </ul>
-                                @endforelse
                             </div>
                         </div>
                     </div>

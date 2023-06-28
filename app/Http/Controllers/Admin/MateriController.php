@@ -60,7 +60,10 @@ class MateriController extends Controller
             'tab_materi' => 'required',
         ]);
 
-        $tabMateri = TabMateri::firstOrCreate($request->only(['jurusan_id', 'kelas_id']));
+        $tabMateri = TabMateri::firstOrCreate(["judul" => $request->only("tab_materi")], [
+            "judul" => $request->tab_materi,
+            "kelas_id" => $request->kelas_id
+        ]);
 
         Materi::create([
             'judul' => $request->judul,
@@ -72,7 +75,7 @@ class MateriController extends Controller
             'kelas_id' => $request->kelas_id,
             'tab_materi_id' => $tabMateri->id
         ]);
-        return redirect()->route('admin.materi.index')->with('success', 'Data berhasil ditambah');
+        return redirect()->route('admin.kelas.show', $request->route("kelas"))->with('success', 'Data berhasil ditambah');
     }
 
     /**
@@ -89,6 +92,10 @@ class MateriController extends Controller
             return $result->slice($result->search($start));
         };
         $materi = Materi::where('slug', $materiSlug)->first();
+        $tersedia = new Carbon($materi->tersedia);
+        if ($tersedia->greaterThan(now())) {
+            return redirect()->back()->with(['info' => 'Materi akan tersedia ' . $tersedia->locale('id')->diffForHumans()]);;
+        }
         return view('admin.materi.show', [
             'materi' => $materi,
             'routeParameters' => $routeParameters('kelas')

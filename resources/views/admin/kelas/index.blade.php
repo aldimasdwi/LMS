@@ -11,7 +11,7 @@
 <x-alert></x-alert>
 
 <div class="page-content container-fluid">
-    @if (auth()->user()->jurusan_id === 2)
+    @if (auth()->user()->status_id === 2)
 
     <div class="card">
         <div class="card-header">
@@ -20,7 +20,7 @@
     </div>
     @endif
     <div class="row">
-        @foreach ($kelass as $kelas)
+        @forelse ($kelass as $kelas)
         <div class="col-lg-4 col-sm-12">
             <div class="card border-bottom border-info rounded">
                 <div class="card-body">
@@ -52,7 +52,16 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Tidak tersedia</h4>
+                <p class="card-text">Maaf, untuk saat ini belum ada kelas tersedia untuk jurusan {{
+                    auth()->user()->personal_data->jurusan->name }}</p>
+            </div>
+        </div>
+
+        @endforelse
     </div>
 </div>
 {{--
