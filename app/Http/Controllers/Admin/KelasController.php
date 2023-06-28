@@ -11,8 +11,11 @@ use App\Models\Materi;
 use App\Services\SummernoteService;
 use App\Services\UploadService;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class KelasController extends Controller
@@ -79,11 +82,12 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
+        $dir = config('app.default_dir_path_kelas_thumbnail');
         Kelas::create([
             'nama_kelas' => $request->nama_kelas,
             'slug' => Str::slug($request->nama_kelas),
             'jurusan_id' => $request->jurusan_id,
-            'thumbnail' => $this->uploadService->imageUpload(config('app.default_dir_path_kelas_thumbnail'))
+            'thumbnail' => '/uploads/img/' . $dir . '/' . $this->uploadService->imageUpload($dir)
         ]);
         return redirect()->route('admin.kelas.index')->with('success', 'Data berhasil ditambah');
     }
@@ -96,8 +100,17 @@ class KelasController extends Controller
      */
     public function show($slug)
     {
+        $routeParameters = function (string $start) {
+            $path = trim(request()->getPathInfo(), '/');
+            $result = new Collection(explode('/', $path));
+            return $result->slice($result->search($start));
+        };
+
         $kelass = Kelas::with(['tabMateri', 'tabMateri.materi'])->where(compact('slug'))->first();
-        return view('admin.kelas.show', compact('kelass'));
+        return view('admin.kelas.show', [
+            'kelass' => $kelass,
+            'routeParameters' => $routeParameters('kelas')
+        ]);
     }
 
     /**
@@ -108,8 +121,9 @@ class KelasController extends Controller
      */
     public function edit($slug)
     {
+        $jurusans = Jurusan::all();
         $kelas = Kelas::where(compact('slug'))->first();
-        return view('admin.kelas.edit', compact('kelas'));
+        return view('admin.kelas.edit', compact('kelas', 'jurusans'));
     }
 
     /**
@@ -121,6 +135,9 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kelas)
     {
+        $dir = config('app.default_dir_path_kelas_thumbnail');
+        $request["thumbnail"] = '/uploads/img/' . $dir . '/' . $this->uploadService->imageUpload($dir);
+        $request["slug"] = Str::slug($request->nama_kelas);
         $kelas->update($request->all());
         return redirect()->route('admin.kelas.index')->with('success', 'Data berhasil diupdate');
     }

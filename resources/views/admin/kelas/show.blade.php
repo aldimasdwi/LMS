@@ -9,8 +9,16 @@
 @endpush
 @section('content')
 <x-alert></x-alert>
+<x-breadcrumbs :route-parameters="$routeParameters"></x-breadcrumbs>
 
-<div class="tab-content tabcontent-border p-4">
+<div class=" tab-content tabcontent-border p-4">
+    <div class="card">
+        <div class="card-header">
+            <a href="{{ route('admin.kelas.materi.create', request()->route('kelas')) }}"
+                class="btn btn-primary btn-sm">Tambah Data</a>
+        </div>
+    </div>
+
     <div id="info_kelas" role="tabpanel" class="tab-pane">
         <p>Tanggal Mulai Kelas : 02 Mei 2023</p>
         <p>Tanggal Selesai Kelas : 23 Juni 2023</p> <span>
@@ -54,10 +62,14 @@
                                 @forelse ($tab->materi as $materi)
                                 <ul class="list-group">
                                     <li class="list-group-item col">
-                                        <span>
+                                        <span class="d-flex justify-content-between">
                                             <a href="{{ route('admin.kelas.materi.show', [$kelass->slug, $materi->slug]) }}"
                                                 target="_blank">
                                                 <u>{{ $materi->judul }}</u>
+                                            </a>
+                                            <a href="{{ route('admin.kelas.materi.show', [$kelass->slug, $materi->slug]) }}"
+                                                target="_blank">
+                                                <u>{{ $materi->tersedia }}</u>
                                             </a>
                                         </span>
                                     </li>

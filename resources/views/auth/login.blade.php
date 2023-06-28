@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Laraschool | Login</title>
+  <title>Learning Management System | Login</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
@@ -21,7 +21,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="" class="h4"><b>LARASCHOOL</a>
+        <a href="" class="h4"><b>Learning Management System</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>

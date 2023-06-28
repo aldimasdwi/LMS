@@ -5,7 +5,7 @@
 
             <!-- Logo -->
             <a class="nav-brand" href="/"><img src="{{ asset('img/icons') }}/laravel.jpg" width="50" alt="">
-                LARASCHOOL</a>
+                Learning Management System</a>
 
             <!-- Navbar Toggler -->
             <div class="classy-navbar-toggler">

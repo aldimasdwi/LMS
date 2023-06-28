@@ -4,7 +4,7 @@
   <a href="/" class="brand-link">
     <img src="{{ asset('img/icons') }}/laravel.jpg" alt="laravel Logo" class="brand-image img-circle elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">Laraschool</span>
+    <span class="brand-text font-weight-light">Learning Management System</span>
   </a>
 
   <!-- Sidebar -->
@@ -40,7 +40,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a href="{{ route('admin.materi.index') }}"
             class="nav-link {{ Request::segment(2) == 'materi' ? 'active' : '' }}">
             <i class="nav-icon far fa-image"></i>
@@ -48,7 +48,7 @@
               Materi
             </p>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a href="{{ route('admin.kelas.index') }}"
             class="nav-link {{ Request::segment(2) == 'kelas' ? 'active' : '' }}">

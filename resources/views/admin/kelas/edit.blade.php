@@ -17,7 +17,7 @@
             </h4>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.kelas.update',$kelas->id) }}">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.kelas.update',$kelas->slug) }}">
                 @csrf
                 @method('PATCH')
                 <div class="row">
@@ -40,6 +40,18 @@
                             <label for="nama_kelas">Deskripsi kelas</label>
                             <input value="{{ $kelas->deskripsi }}" required="" type="" name="deskripsi" placeholder=""
                                 class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="jurusan_id">Jurusan</label>
+                            <select class="form-control" name="jurusan_id" id="jurusan_id" required>
+                                <option value="">-- Pilih Jurusan --</option>
+                                @foreach ($jurusans as $jurusan)
+                                <option value="{{ $jurusan->id }}" {{ $kelas->jurusan_id === $jurusan->id ? 'selected' :
+                                    ''
+                                    }}>{{
+                                    $jurusan->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>

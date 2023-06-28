@@ -42,30 +42,31 @@ Route::get('/kelas', [KelasController::class, 'publicIndex'])->name('kelas.publi
 // Route::get('/materi/search',[MateriController::class,'search'])->name('materi.search');
 
 // Route::get('/materi/{materi:slug}',[MateriController::class,'show'])->name('materi.show');
-
+// Route::getCurrentRoute()
 //Pengumuman
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
 Route::get('/pengumuman/{pengumuman:slug}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
 //Admin
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
-	Route::name('admin.')->group(function () {
+    Route::name('admin.')->group(function () {
 
-		Route::get('/', [AdminController::class, 'index'])->name('index');
-		Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-		Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('change-password.index');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('change-password.index');
 
-		//Resource Controller
-		Route::resource('users', 'UsersController');
-		Route::resource('pengumuman', 'PengumumanController');
-		Route::resource('agenda', 'AgendaController');
-		Route::resource('materi', 'MateriController');
-		Route::resource('kelas', 'KelasController');
-		Route::resource('kelas.materi', 'MateriController')->parameters([
-			'kelas' => 'kelas'
-		]);
+        //Resource Controller
+        Route::resource('users', 'UsersController');
+        Route::resource('pengumuman', 'PengumumanController');
+        Route::resource('agenda', 'AgendaController');
+        Route::resource('kelas', 'KelasController')->parameters([
+            'kelas' => 'kelas',
+        ])->scoped(['kelas' => 'slug']);
+        Route::resource('kelas.materi', 'MateriController')->parameters([
+            'kelas' => 'kelas'
+        ]);
 
-		// Pendaftaran
-		Route::get("/pendaftaran", [PendaftaranController::class, "adminIndex"])->name("pendaftaran.index");
-	});
+        // Pendaftaran
+        Route::get("/pendaftaran", [PendaftaranController::class, "adminIndex"])->name("pendaftaran.index");
+    });
 });

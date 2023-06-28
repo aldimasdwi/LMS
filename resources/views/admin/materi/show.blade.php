@@ -1,7 +1,9 @@
 @extends('layouts.backend.app',[
 'title' => 'Baca materi',
+'contentTitle' => 'Baca Materi',
 ])
 @section('content')
+<x-breadcrumbs :route-parameters="$routeParameters"></x-breadcrumbs>
 <div class="clever-catagory blog-details bg-img d-flex align-items-center justify-content-center p-3 height-400"
     style="background-image: url({{ asset($materi->getThumbnail()) }});">
     <div class="blog-details-headline">

@@ -16,7 +16,8 @@
             <h4 class="card-title">Box Materi</h4>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.materi.store') }}">
+            <form method="POST" enctype="multipart/form-data"
+                action="{{ route('admin.kelas.materi.store', request()->route('kelas')) }}">
                 @csrf
                 <div class="form-group">
                     <label for="judul">Judul Materi</label>
@@ -36,7 +37,8 @@
                             <select required="" class="form-control" name="kelas_id">
                                 <option selected="" disabled="">- PILIH KELAS -</option>
                                 @foreach($kelass as $kelas)
-                                <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
+                                <option value="{{ $kelas->id }}" {{ request()->route('kelas') === $kelas->slug ?
+                                    'selected' : '' }}>{{ $kelas->nama_kelas }}</option>
                                 @endforeach
                             </select>
                         </div>

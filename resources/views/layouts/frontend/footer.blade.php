@@ -6,7 +6,7 @@
                 <div class="col-12">
                     <!-- Footer Logo -->
                     <div class="footer-logo">
-                        <a href="/"><h3 class="text-light">LARASCHOOL</h3></a>
+                        <a href="/"><h3 class="text-light">Learning Management System</h3></a>
                     </div>
                     <!-- Copywrite -->
                     <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -22,7 +22,7 @@ Copyright Rahmat Hidayatullah &copy;<script>document.write(new Date().getFullYea
         <!-- Contact Info -->
         <div class="contact-info">
             <a href="#"><span>Phone:</span> +1 123 321 456 654</a>
-            <a href="#"><span>Email:</span> laraschool@example.com</a>
+            <a href="#"><span>Email:</span> Learning Management System@example.com</a>
         </div>
         <!-- Follow Us -->
         <div class="follow-us">

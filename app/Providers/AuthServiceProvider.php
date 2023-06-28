@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\KelasPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         'App\Models\Pengumuman' => 'App\Policies\PengumumanPolicy',
         'App\Models\Materi' => 'App\Policies\MateriPolicy',
+        Kelas::class => KelasPolicy::class,
     ];
 
     /**

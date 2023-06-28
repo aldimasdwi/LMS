@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Laraschool | {{ $title ?? '' }}</title>
+    <title>Learning Management System | {{ $title ?? '' }}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('templates/frontend/clever') }}/img/core-img/favicon.ico">
@@ -33,7 +33,7 @@
             <!-- Contact Info -->
             <div class="contact-info">
                 <a href="#"><span>Phone:</span> +1 123 321 456 654</a>
-                <a href="#"><span>Email:</span> laraschool@example.com</a>
+                <a href="#"><span>Email:</span> Learning Management System@example.com</a>
             </div>
             <!-- Follow Us -->
             <div class="follow-us">

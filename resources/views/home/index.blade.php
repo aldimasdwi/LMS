@@ -14,7 +14,7 @@
             <div class="col-12">
                 <!-- Hero Content -->
                 <div class="hero-content text-center">
-                    <h2>Selamat Datang di Laraschool</h2>
+                    <h2>Selamat Datang di Learning Management System</h2>
                     <a href="#" class="btn clever-btn">Sekolah Elit</a>
                 </div>
             </div>
@@ -26,7 +26,7 @@
 <div class="regular-page-area section-padding-100 mt-5 mb-4">
     <div class="col-lg-9 mx-auto">
         <div class="card">
-            <div class="card-header">Laraschool</div>
+            <div class="card-header">Learning Management System</div>
             <div class="card-body">
                 <p class="lead">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

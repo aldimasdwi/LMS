@@ -13,6 +13,7 @@ use App\Models\TabMateri;
 use Illuminate\Support\Str;
 use File;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 
 class MateriController extends Controller
@@ -82,8 +83,16 @@ class MateriController extends Controller
      */
     public function show(string $kelasSlug, string $materiSlug)
     {
+        $routeParameters = function (string $start) {
+            $path = trim(request()->getPathInfo(), '/');
+            $result = new Collection(explode('/', $path));
+            return $result->slice($result->search($start));
+        };
         $materi = Materi::where('slug', $materiSlug)->first();
-        return view('admin.materi.show', compact('materi'));
+        return view('admin.materi.show', [
+            'materi' => $materi,
+            'routeParameters' => $routeParameters('kelas')
+        ]);
     }
 
     /**

@@ -20,7 +20,7 @@
                         </li>
                         <li>
                             <h6><i class="fa fa-envelope fa-fw" aria-hidden="true"></i> Email</h6>
-                            <h6>laraschool@examlpe.com</h6>
+                            <h6>Learning Management System@examlpe.com</h6>
                         </li>
                         <li>
                             <h6><i class="fa fa-map-pin fa-fw" aria-hidden="true"></i> Alamat</h6>
