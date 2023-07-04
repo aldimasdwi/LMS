@@ -47,16 +47,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public $Status = [
+        "PENDAFTARAN" => 1,
+        "ADMIN" => 2,
+        "SANTRI" => 3,
+        "ALUMNI" => 4
+    ];
+
     public static function booted()
     {
         self::creating(function ($user) {
-            $user->status_id = 3;
+            $user->status_id = $this->Status["SANTRI"];
         });
     }
     public function isAdmin()
     {
-        return $this->status_id = 2;
+        return $this->status_id = $this->Status["ADMIN"];
     }
+
     public function materi()
     {
         return $this->hasMany(Materi::class);

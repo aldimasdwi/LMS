@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Kelas;
 use App\Models\Materi;
+use App\Models\User;
 use App\Services\SummernoteService;
 use App\Services\UploadService;
 use Illuminate\Support\Carbon;
@@ -31,20 +32,13 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $STATUS = [
-            "PENDAFTARAN" => 1,
-            "ADMIN" => 2,
-            "SANTRI" => 3,
-            "ALUMNI" => 4
-        ];
-        $santri = Auth::user();
-        $santriIsAdmin = $santri->status_id == $STATUS["ADMIN"];
+        $user = Auth::user();
         $adminQuery = fn ($query) => $query;
-        $santriQuery = function ($query) use ($santri) {
-            return $query->where('jurusan_id', $santri->personal_data->jurusan_id);
+        $santriQuery = function ($query) use ($user) {
+            return $query->where('jurusan_id', $user->personal_data->jurusan_id);
         };
 
-        $kelass = Kelas::with(['jurusan'])->when($santriIsAdmin, $adminQuery, $santriQuery)->get();
+        $kelass = Kelas::with(['jurusan'])->when($user->isAdmin(), $adminQuery, $santriQuery)->get();
         // dd($kelass->toArray());
         return view('admin.kelas.index', compact('kelass'));
     }

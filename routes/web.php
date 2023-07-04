@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\KelasController;
 //Controllers Namespace
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PengumumanController;
 
@@ -42,7 +43,11 @@ Route::get('/kelas', [KelasController::class, 'publicIndex'])->name('kelas.publi
 // Route::get('/materi/search',[MateriController::class,'search'])->name('materi.search');
 
 // Route::get('/materi/{materi:slug}',[MateriController::class,'show'])->name('materi.show');
-// Route::getCurrentRoute()
+
+// Google Login
+Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
+Route::get(config('services.google.redirect'), [AuthController::class, 'handleGoogleCallback']);
+
 //Pengumuman
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
 Route::get('/pengumuman/{pengumuman:slug}', [PengumumanController::class, 'show'])->name('pengumuman.show');
