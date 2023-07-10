@@ -2,9 +2,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="/" class="brand-link">
-    <img src="{{ asset('img/icons') }}/laravel.jpg" alt="laravel Logo" class="brand-image img-circle elevation-3"
-      style="opacity: .8">
-    <span class="brand-text font-weight-light">Learning Management System</span>
+    {{-- <img src="{{ asset('img/icons') }}/laravel.jpg" alt="laravel Logo" class="brand-image img-circle elevation-3"
+      style="opacity: .8"> --}}
+    <h6 >Learning Management System</h6>
   </a>
 
   <!-- Sidebar -->
@@ -15,13 +15,14 @@
         <img src="{{ asset('img/icons') }}/codeigniter4.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+        <a href="#" >{{ auth()->user()->name }}</a>
       </div>
     </div>
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          @if (auth()->user()->status_id == 2)
         <li class="nav-item">
           <a href="{{ route('admin.index') }}" class="nav-link {{ Request::is('admin') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -40,6 +41,7 @@
             </p>
           </a>
         </li>
+        @endif
         {{-- <li class="nav-item">
           <a href="{{ route('admin.materi.index') }}"
             class="nav-link {{ Request::segment(2) == 'materi' ? 'active' : '' }}">
@@ -52,12 +54,13 @@
         <li class="nav-item">
           <a href="{{ route('admin.kelas.index') }}"
             class="nav-link {{ Request::segment(2) == 'kelas' ? 'active' : '' }}">
-            <i class="nav-icon far fa-circle"></i>
+            <i class="nav-icon fa fa-book"></i>
             <p>
               Kelas
             </p>
           </a>
         </li>
+        @if (auth()->user()->status_id == 2)
         <li class="nav-item">
           <a href="{{ route('admin.pengumuman.index') }}"
             class="nav-link {{ Request::segment(2) == 'pengumuman' ? 'active' : '' }}">
@@ -78,14 +81,24 @@
         </li>
         <li class="nav-item">
           <a href="{{ route('admin.pendaftaran.index') }}"
-            class="nav-link {{ Request::segment(2) == 'agenda' ? 'active' : '' }}">
-            <i class="nav-icon fa fa-book"></i>
+            class="nav-link {{ Request::segment(2) == 'pendaftaran' ? 'active' : '' }}">
+            <i class="nav-icon far fa-circle"></i>
             <p>
               Pendaftaran
             </p>
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="{{ route('admin.profile.tambahadmin') }}"
+            class="nav-link {{ Request::is('admin/tambahadmin') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Tambah Admin
+            </p>
+          </a>
+        </li>
+        @endif
         <li class="nav-header">PENGATURAN</li>
         <li class="nav-item">
           <a href="{{ route('admin.profile.index') }}"
@@ -96,6 +109,7 @@
             </p>
           </a>
         </li>
+        @if (auth()->user()->status_id == 2)
         <li class="nav-item">
           <a href="{{ route('admin.change-password.index') }}"
             class="nav-link {{ Request::is('admin/change-password') ? 'active' : '' }}">
@@ -105,6 +119,7 @@
             </p>
           </a>
         </li>
+        @endif
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

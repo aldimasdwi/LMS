@@ -11,10 +11,7 @@ class Status extends Model
 
     protected $table = "statuses";
 
-    protected $fillable = [
-        'user_id',
-        'name',
-    ];
+    protected $guarded =[];
 
     public function user()
     {

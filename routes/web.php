@@ -3,6 +3,8 @@
 use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GoogleController;
+
 //Admin Namespace
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -28,6 +30,10 @@ use App\Http\Controllers\PengumumanController;
 |
 */
 
+Route::get('/in', function () {
+    return view('admin.kelas.in');
+});
+
 //Home
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -45,8 +51,8 @@ Route::get('/kelas', [KelasController::class, 'publicIndex'])->name('kelas.publi
 // Route::get('/materi/{materi:slug}',[MateriController::class,'show'])->name('materi.show');
 
 // Google Login
-Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('google.login');
-Route::get(config('services.google.redirect'), [AuthController::class, 'handleGoogleCallback']);
+Route::get('/auth/google',[GoogleController::class,'redirectToGoogle']);
+Route::get('auth/google/callback',[GoogleController::class,'handleGoogleCallback']);
 
 //Pengumuman
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
@@ -57,7 +63,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::name('admin.')->group(function () {
 
         Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::post('/data', [ProfileController::class, 'data'])->name('profile.data');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/tambahadmin', [ProfileController::class, 'tambahadmin'])->name('profile.tambahadmin');
         Route::get('/change-password', [ChangePasswordController::class, 'index'])->name('change-password.index');
 
         //Resource Controller

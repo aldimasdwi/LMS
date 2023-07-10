@@ -5,14 +5,13 @@
 @push('css')
 <!-- DataTables -->
 <link rel="stylesheet"
-    href="{{ asset('templates/backend/AdminLTE-3.0.1') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+    href="templates/backend/AdminLTE-3.0.1/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 @endpush
 @section('content')
 <x-alert></x-alert>
 
 <div class="page-content container-fluid">
-    @if (auth()->user()->status_id === 2)
-
+    @if(Auth::User()->status_id === 2 || Auth::User()->status_id === 4 || Auth::User()->status_id === 5 || Auth::User()->status_id === 6)
     <div class="card">
         <div class="card-header">
             <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
@@ -24,7 +23,7 @@
         <div class="col-lg-4 col-sm-12">
             <div class="card border-bottom border-info rounded">
                 <div class="card-body">
-                    <center>
+                    <div>
                         {{-- @dd(asset('a')) --}}
                         <img src="{{ asset($kelas->thumbnail) }}" class="w-100">
                         <h4 class="">{{$kelas->nama_kelas}}</h4>
@@ -35,7 +34,7 @@
                             <a href="{{ route('admin.kelas.show', $kelas->slug) }}" class="btn btn-success">Akses
                                 Kelas</a>
 
-                            @if (auth()->user()->status_id === 2)
+                                @if(Auth::User()->status_id === 2 || Auth::User()->status_id === 4 || Auth::User()->status_id === 5 || Auth::User()->status_id === 6)
                             <a href="{{ route('admin.kelas.edit', $kelas->slug) }}" class="btn btn-info">Edit</a>
 
                             <form class="span" method="POST" action="{{ route('admin.kelas.destroy', $kelas->slug) }}">
@@ -48,7 +47,7 @@
                         </div>
                         {{-- @can('viewAny') --}}
                         {{-- @endcan --}}
-                    </center>
+                    </div>
                 </div>
             </div>
         </div>

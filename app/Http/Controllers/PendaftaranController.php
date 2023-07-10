@@ -30,9 +30,10 @@ class PendaftaranController extends Controller
         $users = User::where("status_id", 1)->get();
         return View::make('admin.pendaftaran.index', compact('users'));
     }
+
     public function daftar(PendaftaranRequest $request)
     {
-        $user = User::create($request->validated());
+        $user = User::create(array_merge($request->validated(), ['status_id' => 3]));
 
         Auth::login($user);
 
@@ -45,15 +46,11 @@ class PendaftaranController extends Controller
         }
 
         PersonalData::create($validatedData->toArray());
-
         Contact::create($validatedData->toArray());
-
         Education::create($validatedData->toArray());
-
         Family::create($validatedData->toArray());
-
         Kuesioner::create($validatedData->toArray());
 
-        return Redirect::to('/')->with(["notice" => "Pendaftaran Berhasil Terkirim"]);
+        return redirect('/')->with(["notice" => "Pendaftaran Berhasil Terkirim"]);
     }
 }

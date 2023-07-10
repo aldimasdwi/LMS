@@ -36,6 +36,7 @@
                     <div class="card">
                         <div class="card-body">
                             <span>{!! $materi->deskripsi !!}</span>
+                            
                         </div>
                     </div>
                 </div>

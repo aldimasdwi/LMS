@@ -15,10 +15,13 @@ class StatusSeeder extends Seeder
     public function run()
     {
         DB::table('statuses')->insert([
-            ['name' => 'Pendaftaran'],
-            ['name' => 'Admin'],
-            ['name' => 'Santri'],
             ['name' => 'Alumni'],
+            ['name' => 'SuperAdmin'],
+            ['name' => 'Santri'],
+            ['name' => 'AdminProgrammer'],
+            ['name' => 'AdminMarketer'],
+            ['name' => 'AdminMultimedia'],
+            ['name' => 'AdminMenejemen'],
         ]);
     }
 }

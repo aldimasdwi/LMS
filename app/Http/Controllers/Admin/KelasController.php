@@ -30,18 +30,42 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+     
+
     public function index()
     {
-        $user = Auth::user();
-        $adminQuery = fn ($query) => $query;
-        $santriQuery = function ($query) use ($user) {
-            return $query->where('jurusan_id', $user->personal_data->jurusan_id);
-        };
+        $user = auth()->user();
+        $kelass = Kelas::with('jurusan');
 
-        $kelass = Kelas::with(['jurusan'])->when($user->isAdmin(), $adminQuery, $santriQuery)->get();
-        // dd($kelass->toArray());
+        if ($user->status_id == 2) {
+            // Tampilkan semua kelas
+        } elseif ($user->status_id == 4) {
+            $kelass->whereHas('jurusan', function ($query) {
+                $query->where('jurusan_id', 1);
+            });
+        } elseif ($user->status_id == 5) {
+            $kelass->whereHas('jurusan', function ($query) {
+                $query->where('jurusan_id', 3);
+            });
+        } elseif ($user->status_id == 6) {
+            $kelass->whereHas('jurusan', function ($query) {
+                $query->where('jurusan_id', 2);
+            });
+        } elseif ($user->status_id == 3) {
+            $santriQuery = function ($query) use ($user) {
+                return $query->where('jurusan_id', $user->personal_data->jurusan_id);
+            };
+            $kelass->where($santriQuery);
+        }
+
+        $kelass = $kelass->get();
+
         return view('admin.kelas.index', compact('kelass'));
     }
+
+
 
     public function publicIndex()
     {
@@ -92,20 +116,47 @@ class KelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function show($slug)
     {
+        $kelas = Kelas::with(['tabMateri', 'tabMateri.materi'])->where(compact('slug'))->first();
+        $materiExpired = [];
+        $materiTersedia = [];
+
+        foreach ($kelas->tabMateri as $tabMateri) {
+            foreach ($tabMateri->materi as $materi) {
+                $waktuKadaluwarsa = Carbon::parse($materi->tersedia);
+
+                if (Carbon::now()->lessThan($waktuKadaluwarsa)) {
+                    $materiTersedia[] = $materi;
+                } else {
+                    $materiExpired[] = $materi;
+                }
+            }
+        }
+
         $routeParameters = function (string $start) {
             $path = trim(request()->getPathInfo(), '/');
             $result = new Collection(explode('/', $path));
             return $result->slice($result->search($start));
         };
 
-        $kelass = Kelas::with(['tabMateri', 'tabMateri.materi'])->where(compact('slug'))->first();
         return view('admin.kelas.show', [
-            'kelass' => $kelass,
-            'routeParameters' => $routeParameters('kelas')
+            'kelass' => $kelas,
+            'routeParameters' => $routeParameters('kelas'),
+            'materiExpired' => $materiExpired,
+            'materiTersedia' => $materiTersedia,
         ]);
     }
+
+
+
+
+
+
+
+
 
     /**
      * Show the form for editing the specified resource.

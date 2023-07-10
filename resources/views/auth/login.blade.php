@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +18,40 @@
     <link rel="stylesheet" href="{{ asset('templates/backend/AdminLTE-3.0.1') }}/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition login-page">
+<body>
+
+    @if(session('ubah'))
+<div id="popupTrigger" data-toggle="modal" data-target="#exampleModal"></div>
+
+<!-- Create the popup modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Coba Lagi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ session('ubah')}}</p>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary active" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add JavaScript code to trigger the popup on page load -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('popupTrigger').click();
+  });
+</script>
+@endif
+
+<div class="hold-transition login-page">
     <div class="login-box mb-5">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -85,6 +120,8 @@
         </div>
         <!-- /.card -->
     </div>
+</div>
+
     <!-- /.login-box -->
 
     <!-- jQuery -->

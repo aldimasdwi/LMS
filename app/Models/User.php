@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Status;
+
 
 use App\Models\Materi;
 use App\Models\Pengumuman;
@@ -48,23 +50,25 @@ class User extends Authenticatable
     ];
 
 
-    public $Status = [
-        "PENDAFTARAN" => 1,
-        "ADMIN" => 2,
-        "SANTRI" => 3,
-        "ALUMNI" => 4
-    ];
 
-    public static function booted()
-    {
-        self::creating(function ($user) {
-            $user->status_id = $this->Status["SANTRI"];
-        });
-    }
-    public function isAdmin()
-    {
-        return $this->status_id = $this->Status["ADMIN"];
-    }
+    // public  $Status = [
+    //     "PENDAFTARAN" => 1,
+    //     "ADMIN" => 2,
+    //     "SANTRI" => 3,
+    //     "ALUMNI" => 4
+    // ];
+
+    // public static function booted()
+    // {
+    //     self::creating(function ($user) {
+    //         $user->status_id = '3';
+    //     });
+    // }
+
+    // public function isAdmin()
+    // {
+    //     return $this->status_id = $this->Status["ADMIN"];
+    // }
 
     public function materi()
     {

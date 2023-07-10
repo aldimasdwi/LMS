@@ -56,7 +56,7 @@
                                 <a class="dropdown-toggle" href="#" role="button" id="userName" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">{{ auth()->user()->name }}</a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userName">
-                                    <a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard</a>
+                                    <a class="dropdown-item" href="admin/kelas">Dashboard</a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item">Logout</button>
